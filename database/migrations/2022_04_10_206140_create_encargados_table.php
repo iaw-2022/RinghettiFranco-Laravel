@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('id_presentacion')->references('id')->on('presentaciones');
             $table->integer('cantidad');
             $table->unsignedBigInteger('id_pedido');
-            $table->foreign('id_pedido')->references('id')->on('pedidos');
+            $table->foreign('id_pedido')->references('id')->on('pedidos')->onDelete('cascade');;
         });
     }
 

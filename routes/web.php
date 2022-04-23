@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Navigation\ProductsController;
-use App\Http\Controllers\Navigation\OrdersController;
-use App\Http\Controllers\Navigation\ClientsController;
+use App\Http\Controllers\MarcasController;
 
 
 /*
@@ -25,20 +23,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-
-Route::controller(ProductsController::class)->group(function(){
-    Route::get('/marcas', 'index')->middleware(['auth'])->name('dashboard');
-    Route::get('/marcas/{marca}/{producto?}', 'view')->middleware(['auth'])->name('dashboard');
-});
-
-Route::controller(ClientsController::class)->group(function(){
-    Route::get('/clientes', 'index')->middleware(['auth'])->name('dashboard');
-    Route::get('/clientes/{cliente}', 'view')->middleware(['auth'])->name('dashboard');
-});
-
-Route::controller(OrdersController::class)->group(function(){
-    Route::get('/pedidos', 'index')->middleware(['auth'])->name('dashboard');
-    Route::get('/pedidos/{pedido}', 'view')->middleware(['auth'])->name('dashboard');
+Route::middleware(['auth'])->group(function(){
+    Route::controller(MarcasController::class)->group(function(){
+        Route::get('/marcas', 'index');
+    });
+    
+   //Cositas
 });
 
 require __DIR__.'/auth.php';

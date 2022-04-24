@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MarcasController;
+use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\FormatosController;
+use App\Http\Controllers\ProductosController;
 
 
 /*
@@ -28,6 +31,17 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/marcas', 'index');
     });
     
+    Route::controller(ClientesController::class)->group(function(){
+        Route::get('/clientes', 'index');
+    });
+
+    Route::controller(FormatosController::class)->group(function(){
+        Route::get('/formatos', 'index');
+    });
+
+    Route::controller(ProductosController::class)->group(function(){
+        Route::get('/productos', 'index');
+    });
    //Cositas
 });
 

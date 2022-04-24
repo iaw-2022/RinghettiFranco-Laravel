@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Marca;
+use Illuminate\Support\Facades\DB;
 
 class MarcaSeeder extends Seeder
 {
@@ -15,9 +15,17 @@ class MarcaSeeder extends Seeder
      */
     public function run()
     {
-        Marca::create(array('nombre'=> 'La Serenisima'));
-        Marca::create(array('nombre'=> 'Tregar'));
-        Marca::create(array('nombre'=> 'Las Tres Marias'));
-        Marca::create(array('nombre'=> 'Sancor'));
+        DB::table('marcas')->insert([
+            'nombre' => 'La Serenisima'
+        ]);
+        DB::table('marcas')->insert([
+            'nombre' => 'Tregar'
+        ]);
+        DB::table('marcas')->insert([
+            'nombre' => 'Las Tres Marias'
+        ]);
+        DB::table('marcas')->insert([
+            'nombre' => 'Sancor'
+        ]);
     }
 }

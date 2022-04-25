@@ -13,9 +13,22 @@ class Presentacion extends Model
     protected $fillable = [
         'id',
         'stock',
-        'id_productomarca',
+        'id_producto',
+        'id_marca',
         'id_formato'
     ];    
+
+    public function Producto(){
+        return $this->hasOne('App\Models\Producto');
+    }
+
+    public function Marca(){
+        return $this->hasOne('App\Models\Marca');
+    }
+
+    public function Formato(){
+        return $this->hasOne('App\Models\Formato');
+    }
 
     protected $table = "presentaciones";
     

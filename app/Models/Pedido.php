@@ -17,6 +17,10 @@ class Pedido extends Model
         'fecha_entregado'
     ];    
 
+    public function Cliente(){
+        return $this->hasOne('App\Models\Cliente');
+    }
+
     protected $table = "pedidos";
 
     use HasFactory;

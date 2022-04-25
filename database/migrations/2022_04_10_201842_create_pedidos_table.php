@@ -17,7 +17,11 @@ return new class extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->unsignedBigInteger('id_cliente');
-            $table->foreign('id_cliente')->references('id')->on('clientes')->onDelete('cascade');;
+            $table->foreign('id_cliente')
+                ->references('id')
+                ->on('clientes')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->datetime('fecha_realizado');
             $table->datetime('fecha_entregado');
         });

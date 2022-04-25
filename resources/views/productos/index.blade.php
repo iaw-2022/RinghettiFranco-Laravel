@@ -1,4 +1,4 @@
-@extends('layouts.baselayout')
+@extends('layouts.app')
 
 @section('titulo')
     <title> Productos </title>

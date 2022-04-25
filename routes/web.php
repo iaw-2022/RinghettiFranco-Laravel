@@ -28,20 +28,21 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth'])->group(function(){
     Route::controller(MarcasController::class)->group(function(){
-        Route::get('/marcas', 'index');
+        Route::get('/marcas', 'index')->name('marcas-index');
     });
     
     Route::controller(ClientesController::class)->group(function(){
-        Route::get('/clientes', 'index');
+        Route::get('/clientes', 'index')->name('clientes-index');;
     });
 
     Route::controller(FormatosController::class)->group(function(){
-        Route::get('/formatos', 'index');
+        Route::get('/formatos', 'index')->name('formatos-index');;
     });
 
     Route::controller(ProductosController::class)->group(function(){
-        Route::get('/productos', 'index');
+        Route::get('/productos', 'index')->name('productos-index');;
     });
+    
    //Cositas
 });
 

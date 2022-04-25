@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    <title> Productos </title>
+    <title> Marcas </title>
 @endsection
 
 @section('contenido')
@@ -10,7 +10,7 @@
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
-                        <div class="col-sm-8"><h2><b>Tipos de productos</b></h2></div>
+                        <div class="col-sm-8"><h2><b>Productos</b></h2></div>
                     </div>
                 </div>
           
@@ -25,14 +25,22 @@
                 <table class="table table-striped table-hover table-bordered" id="myTable">
                     <thead>
                         <tr>
+                            <th scope="col">Stock</th>
                             <th scope="col">Producto</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Formato</th>
+                            <th scope="col">Precio</th>
                         </tr>
                     </thead>
                 
                     <tbody>
-                         @foreach($productos as $producto)
+                         @foreach($presentaciones as $presentacion)
                         <tr>
-                            <td>{{$producto->nombre}}</td>
+                            <td>{{$presentacion->stock}}</td>
+                            <td>{{$presentacion->producto->nombre}}</td>
+                            <td>{{$presentacion->marca->nombre}}</td>
+                            <td>{{$presentacion->formato->descripcion}} {{$presentacion->formato->cantidad}} {{$presentacion->formato->unidades}}</td>
+                            <td>$ {{$presentacion->precio}}</td>
                         </tr>   
                         @endforeach
                     </tbody>

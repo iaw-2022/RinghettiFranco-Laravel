@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedBigInteger('id_cliente');
-            $table->foreign('id_cliente')
+            $table->unsignedBigInteger('cliente_id');
+            $table->foreign('cliente_id')
                 ->references('id')
                 ->on('clientes')
                 ->onDelete('cascade')

@@ -17,20 +17,21 @@ return new class extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('stock')->default('0');
-            $table->unsignedBigInteger('id_marca');
-            $table->foreign('id_marca')
+            $table->float('precio')->default('0');
+            $table->unsignedBigInteger('marca_id');
+            $table->foreign('marca_id')
                 ->references('id')
                 ->on('marcas')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->unsignedBigInteger('id_producto');
-            $table->foreign('id_producto')
+            $table->unsignedBigInteger('producto_id');
+            $table->foreign('producto_id')
                 ->references('id')
                 ->on('productos')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->unsignedBigInteger('id_formato');
-            $table->foreign('id_formato')
+            $table->unsignedBigInteger('formato_id');
+            $table->foreign('formato_id')
                 ->references('id')
                 ->on('formatos')
                 ->onDelete('cascade')

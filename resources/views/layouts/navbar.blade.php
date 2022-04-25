@@ -9,6 +9,9 @@
         <a class="nav-link" href="{{route('dashboard')}}">Inicio<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{{route('presentaciones-index')}}">Productos</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="{{route('clientes-index')}}">Clientes</a>
       </li>
       <li class="nav-item">

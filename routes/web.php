@@ -5,6 +5,7 @@ use App\Http\Controllers\MarcasController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FormatosController;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\PresentacionesController;
 
 
 /*
@@ -43,6 +44,9 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/productos', 'index')->name('productos-index');;
     });
     
+    Route::controller(PresentacionesController::class)->group(function(){
+        Route::get('/presentaciones', 'index')->name('presentaciones-index');;
+    });
    //Cositas
 });
 

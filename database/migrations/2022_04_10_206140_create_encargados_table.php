@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('encargados', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedBigInteger('id_presentacion');
-            $table->foreign('id_presentacion')->references('id')->on('presentaciones');
+            $table->unsignedBigInteger('presentacion_id');
+            $table->foreign('presentacion_id')->references('id')->on('presentaciones');
             $table->integer('cantidad');
-            $table->unsignedBigInteger('id_pedido');
-            $table->foreign('id_pedido')->references('id')->on('pedidos')->onDelete('cascade');;
+            $table->unsignedBigInteger('pedido_id');
+            $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('cascade');;
         });
     }
 

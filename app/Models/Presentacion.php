@@ -13,21 +13,22 @@ class Presentacion extends Model
     protected $fillable = [
         'id',
         'stock',
+        'precio',
         'id_producto',
         'id_marca',
         'id_formato'
     ];    
 
     public function Producto(){
-        return $this->hasOne('App\Models\Producto');
+        return $this->belongsTo(Producto::class);
     }
 
     public function Marca(){
-        return $this->hasOne('App\Models\Marca');
+        return $this->belongsTo(Marca::class);
     }
 
     public function Formato(){
-        return $this->hasOne('App\Models\Formato');
+        return $this->belongsTo(Formato::class);
     }
 
     protected $table = "presentaciones";

@@ -34,13 +34,13 @@
                          @foreach($marcas as $marca)
                         <tr>
                             <td>{{$marca->nombre}}</td>
-                        </tr>
                             <td>
                                 <a href="" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
                             </td>
                             <td>
                                 <a href="" onclick="return confirm('¿Desea eliminar {{$marca->nombre}}?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
-                            </td>   
+                            </td> 
+                        </tr>  
                         @endforeach
                     </tbody>
                 </form>

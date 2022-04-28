@@ -12,13 +12,13 @@ class Pedido extends Model
 
     protected $fillable = [
         'id',
-        'id_cliente',
+        'cliente_id',
         'fecha_realizado',
         'fecha_entregado'
     ];    
 
     public function Cliente(){
-        return $this->hasOne('App\Models\Cliente');
+        return $this->belongsTo('App\Models\Cliente');
     }
 
     protected $table = "pedidos";

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    <title> Marcas </title>
+    <title> Clientes </title>
 @endsection
 
 @section('contenido')
@@ -10,8 +10,8 @@
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
-                        <div class="col-sm-8"><h2><b>Productos</b></h2></div>
-                        <div class="col-sm-8"><h2><a href="" type="button" class="btn btn-primary" method="GET">Agregar producto</a></h2></div>
+                        <div class="col-sm-8"><h2><b>Pedidos</b></h2></div>
+                        <div class="col-sm-8"><h2><a href="" type="button" class="btn btn-primary" method="GET">Nuevo pedido</a></h2></div>
                     </div>
                 </div>
           
@@ -26,27 +26,26 @@
                 <table class="table table-striped table-hover table-bordered" id="myTable">
                     <thead>
                         <tr>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Marca</th>
-                            <th scope="col">Formato</th>
-                            <th scope="col">Precio</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Realizado</th>
+                            <th scope="col">Entregado</th>
                         </tr>
                     </thead>
                 
                     <tbody>
-                        @foreach($presentaciones as $presentacion)
+                         @foreach($pedidos as $pedido)
                         <tr>
-                            <td>{{$presentacion->stock}}</td>
-                            <td>{{$presentacion->marca->nombre}}</td>
-                            <td>{{$presentacion->producto->nombre}}</td>
-                            <td>{{$presentacion->formato->descripcion}} {{$presentacion->formato->cantidad}} {{$presentacion->formato->unidades}}</td>
-                            <td>${{$presentacion->precio}}</td>
+                            <td>{{$pedido->cliente->apellido}}, {{$pedido->cliente->nombre}}</td>
+                            <td>{{$pedido->fecha_realizado}}</td>
+                            <td>{{$pedido->fecha_entregado}}</td>
+                            <td>
+                                <a href="" class="view" title="View" data-toggle="tooltip"><x-bi-info-circle-fill /></a>
+                            </td>
                             <td>
                                 <a href="" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
                             </td>
                             <td>
-                                <a href="" onclick="return confirm('¿Desea eliminar {{$presentacion->producto->nombre}}  {{$presentacion->marca->nombre}} en {{$presentacion->formato->descripcion}} {{$presentacion->formato->cantidad}} {{$presentacion->formato->unidades}}?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
+                                <a href="" onclick="return confirm('¿Desea eliminar el pedido?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
                             </td>
                         </tr>   
                         @endforeach

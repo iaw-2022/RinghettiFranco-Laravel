@@ -11,6 +11,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8"><h2><b>Marcas</b></h2></div>
+                        <div class="col-sm-8"><h2><a href="" type="button" class="btn btn-primary" method="GET">Nueva marca</a></h2></div>
                     </div>
                 </div>
           
@@ -33,7 +34,13 @@
                          @foreach($marcas as $marca)
                         <tr>
                             <td>{{$marca->nombre}}</td>
-                        </tr>   
+                        </tr>
+                            <td>
+                                <a href="" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
+                            </td>
+                            <td>
+                                <a href="" onclick="return confirm('¿Desea eliminar {{$marca->nombre}}?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
+                            </td>   
                         @endforeach
                     </tbody>
                 </form>

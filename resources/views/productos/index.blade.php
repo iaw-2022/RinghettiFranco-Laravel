@@ -11,6 +11,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8"><h2><b>Tipos de productos</b></h2></div>
+                        <div class="col-sm-8"><h2><a href="" type="button" class="btn btn-primary" method="GET">Nuevo producto</a></h2></div>
                     </div>
                 </div>
           
@@ -33,6 +34,9 @@
                          @foreach($productos as $producto)
                         <tr>
                             <td>{{$producto->nombre}}</td>
+                            <td>
+                                <a href="" onclick="return confirm('¿Desea borrar el producto {{$producto->nombre}}?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
+                            </td>
                         </tr>   
                         @endforeach
                     </tbody>

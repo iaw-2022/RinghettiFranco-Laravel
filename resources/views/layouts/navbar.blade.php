@@ -6,13 +6,16 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="{{route('dashboard')}}">Inicio<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{route('dashboard')}}">Inicio</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('presentaciones-index')}}">Productos</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('clientes-index')}}">Clientes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('pedidos-index')}}">Pedidos</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('marcas-index')}}">Marcas</a>

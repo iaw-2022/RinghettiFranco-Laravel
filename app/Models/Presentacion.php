@@ -14,9 +14,9 @@ class Presentacion extends Model
         'id',
         'stock',
         'precio',
-        'id_producto',
-        'id_marca',
-        'id_formato'
+        'producto_id',
+        'marca_id',
+        'formato_id'
     ];    
 
     public function Producto(){

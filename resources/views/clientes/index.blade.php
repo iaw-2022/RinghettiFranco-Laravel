@@ -11,6 +11,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8"><h2><b>Clientes</b></h2></div>
+                        <div class="col-sm-8"><h2><a href="" type="button" class="btn btn-primary" method="GET">Nuevo cliente</a></h2></div>
                     </div>
                 </div>
           
@@ -39,6 +40,15 @@
                             <td>{{$cliente->documento_tipo}}: {{$cliente->documento_numero}}</td>
                             <td>{{$cliente->correo}}</td>
                             <td>{{$cliente->IVA}}</td>
+                            <td>
+                                <a href="" class="view" title="View" data-toggle="tooltip"><x-bi-info-circle-fill /></a>
+                            </td>
+                            <td>
+                                <a href="" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
+                            </td>
+                            <td>
+                                <a href="" onclick="return confirm('¿Desea eliminar a {{$cliente->apellido}}, {{$cliente->nombre}}?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
+                            </td>
                         </tr>   
                         @endforeach
                     </tbody>

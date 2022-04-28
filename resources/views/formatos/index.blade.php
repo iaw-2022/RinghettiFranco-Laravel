@@ -11,6 +11,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8"><h2><b>Formatos</b></h2></div>
+                        <div class="col-sm-8"><h2><a href="" type="button" class="btn btn-primary" method="GET">Nuevo formato</a></h2></div>
                     </div>
                 </div>
           
@@ -35,6 +36,12 @@
                         <tr>
                             <td>{{$formato->descripcion}}</td>
                             <td>{{$formato->cantidad}} {{$formato->unidades}}</td>
+                            <td>
+                                <a href="" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
+                            </td>
+                            <td>
+                                <a href="" onclick="return confirm('¿Desea eliminar el formato {{$formato->descripcion}} {{$formato->cantidad}} {{$formato->unidades}}?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
+                            </td>
                         </tr>   
                         @endforeach
                     </tbody>

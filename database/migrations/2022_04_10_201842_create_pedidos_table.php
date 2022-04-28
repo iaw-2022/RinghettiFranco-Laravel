@@ -22,8 +22,8 @@ return new class extends Migration
                 ->on('clientes')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->datetime('fecha_realizado');
-            $table->datetime('fecha_entregado');
+            $table->date('fecha_realizado');
+            $table->date('fecha_entregado')->nullable();
         });
     }
 

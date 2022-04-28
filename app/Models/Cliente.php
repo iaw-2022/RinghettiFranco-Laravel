@@ -24,6 +24,10 @@ class Cliente extends Model
         'CUIT'
     ];    
 
+    public function Pedidos(){
+        return $this->hasMany('App\Models\Pedido');
+    }
+
     protected $table = "clientes";
 
 }

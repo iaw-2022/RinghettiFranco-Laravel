@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FormatosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\PresentacionesController;
+use App\Http\Controllers\PedidosController;
 
 
 /*
@@ -44,7 +45,10 @@ Route::middleware(['auth'])->group(function(){
     Route::controller(PresentacionesController::class)->group(function(){
         Route::get('/presentaciones', 'index')->name('presentaciones-index');;
     });
-   //Cositas
+
+    Route::controller(PedidosController::class)->group(function(){
+        Route::get('/pedidos', 'index')->name('pedidos-index');;
+    });
 });
 
 require __DIR__.'/auth.php';

@@ -21,7 +21,7 @@ use App\Http\Controllers\PedidosController;
 */
 
 
-Route::get('/', function () {
+Route::get('/', function() {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
@@ -31,23 +31,24 @@ Route::middleware(['auth'])->group(function(){
     });
     
     Route::controller(ClientesController::class)->group(function(){
-        Route::get('/clientes', 'index')->name('clientes-index');;
+        Route::get('/clientes', 'index')->name('clientes-index');
+        Route::get('/clientes/{id}', 'show')->name('clientes-show');
     });
 
     Route::controller(FormatosController::class)->group(function(){
-        Route::get('/formatos', 'index')->name('formatos-index');;
+        Route::get('/formatos', 'index')->name('formatos-index');
     });
 
     Route::controller(ProductosController::class)->group(function(){
-        Route::get('/productos', 'index')->name('productos-index');;
+        Route::get('/productos', 'index')->name('productos-index');
     });
     
     Route::controller(PresentacionesController::class)->group(function(){
-        Route::get('/presentaciones', 'index')->name('presentaciones-index');;
+        Route::get('/presentaciones', 'index')->name('presentaciones-index');
     });
 
     Route::controller(PedidosController::class)->group(function(){
-        Route::get('/pedidos', 'index')->name('pedidos-index');;
+        Route::get('/pedidos', 'index')->name('pedidos-index');
     });
 });
 

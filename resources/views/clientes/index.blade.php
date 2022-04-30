@@ -34,14 +34,14 @@
                     </thead>
                 
                     <tbody>
-                         @foreach($clientes as $cliente)
+                        @foreach($clientes as $cliente)
                         <tr>
                             <td>{{$cliente->apellido}}, {{$cliente->nombre}}</td>
                             <td>{{$cliente->documento_tipo}}: {{$cliente->documento_numero}}</td>
                             <td>{{$cliente->correo}}</td>
                             <td>{{$cliente->IVA}}</td>
                             <td>
-                                <a href="" class="view" title="View" data-toggle="tooltip"><x-bi-info-circle-fill /></a>
+                                <a href="{{route('clientes-show', ['id' => $cliente->id])}}" class="view" title="View" data-toggle="tooltip"><x-bi-info-circle-fill /></a>
                             </td>
                             <td>
                                 <a href="" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Models\Pedido;
 
 class ClientesController extends Controller
 {
@@ -47,7 +48,11 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        $pedidos = Pedido::all()->where('cliente_id',$id);
+        return view('clientes.show')
+            ->with('cliente', $cliente)
+            ->with('pedidos', $pedidos);
     }
 
     /**

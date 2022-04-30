@@ -31,7 +31,7 @@
                     </thead>
                 
                     <tbody>
-                         @foreach($marcas as $marca)
+                        @foreach($marcas as $marca)
                         <tr>
                             <td>{{$marca->nombre}}</td>
                             <td>

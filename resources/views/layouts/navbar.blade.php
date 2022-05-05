@@ -27,5 +27,11 @@
         <a class="nav-link" href="{{route('formatos-index')}}">Formatos</a>
       </li>
     </ul>
+
+    <form method="POST" action="{{ route ('logout')}}" class="form-inline my-2 my-lg-0">
+      @csrf
+      <a href="#" class="nav-link px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2" onclick="event.preventDefault(); this.closest('form').submit();" >Cerrar sesion</a>
+    </form>
+
   </div>
 </nav>

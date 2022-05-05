@@ -18,7 +18,7 @@
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label"><b>Documento</b></label>              
-                <label class="col-form-label col-sm-10">{{$cliente->documento_tipo}}, {{$cliente->documento_nro}}</label>
+                <label class="col-form-label col-sm-10">{{$cliente->documento_tipo}}: {{$cliente->documento_numero}}</label>
             </div>
 
             <div class="form-group row">
@@ -33,7 +33,7 @@
             
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label"><b>Situacion IVA</b></label>              
-                <label class="col-form-label col-sm-10">{{$cliente->IVA}} - {{$cliente->cuit}}</label>
+                <label class="col-form-label col-sm-10">{{$cliente->IVA}} - CUIT/CUIL: {{$cliente->cuit}}</label>
             </div>
 
             <div class="form-group row">

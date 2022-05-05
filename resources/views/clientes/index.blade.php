@@ -11,7 +11,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8"><h2><b>Clientes</b></h2></div>
-                        <div class="col-sm-8"><h2><a href="" type="button" class="btn btn-primary" method="GET">Nuevo cliente</a></h2></div>
+                        <div class="col-sm-8"><h2><a href="{{route('clientes-create')}}" type="button" class="btn btn-primary" method="GET">Nuevo cliente</a></h2></div>
                     </div>
                 </div>
           

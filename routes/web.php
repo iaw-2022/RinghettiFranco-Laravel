@@ -32,7 +32,9 @@ Route::middleware(['auth'])->group(function(){
     
     Route::controller(ClientesController::class)->group(function(){
         Route::get('/clientes', 'index')->name('clientes-index');
+        Route::get('/clientes/nuevo', 'create')->name('clientes-create');
         Route::get('/clientes/{id}', 'show')->name('clientes-show');
+        Route::post('/clientes', 'store')->name('clientes-store');
     });
 
     Route::controller(FormatosController::class)->group(function(){

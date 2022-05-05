@@ -26,7 +26,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        //
+        return view('clientes.create');
     }
 
     /**
@@ -37,7 +37,21 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cliente = new Cliente();
+
+        $cliente->nombre = $request->nombre;
+        $cliente->apellido = $request->apellido;
+        $cliente->documento_tipo = $request->doctipo;
+        $cliente->documento_numero = $request->docnro;
+        $cliente->correo = $request->correo;
+        $cliente->telefono = $request->telefono;
+        $cliente->direccion = $request->calle.' '.$request->nro;
+        $cliente->IVA = $request->IVA;
+        $cliente->CUIT = $request->CUIT; 
+
+        $cliente->save();
+
+        return redirect()->route('clientes-index')->with('success', 'Se agregó con éxito al nuevo cliente.'); 
     }
 
     /**

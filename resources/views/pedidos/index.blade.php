@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    <title> Clientes </title>
+    <title> Pedidos </title>
 @endsection
 
 @section('contenido')

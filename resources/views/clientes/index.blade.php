@@ -47,7 +47,7 @@
                                 <a href="{{route('clientes-edit', ['id' => $cliente->id])}}" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
                             </td>
                             <td>
-                                <a href="" onclick="return confirm('¿Desea eliminar a {{$cliente->apellido}}, {{$cliente->nombre}}?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
+                                <a href="{{route('clientes-delete', ['id' => $cliente->id])}}" onclick="return confirm('¿Desea eliminar a {{$cliente->apellido}}, {{$cliente->nombre}}? Se eliminarán todos sus datos asociados')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
                             </td>
                         </tr>   
                         @endforeach

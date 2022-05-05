@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/clientes/mostrar/{id}', 'show')->name('clientes-show');
         Route::get('/clientes/editar/{id}', 'edit')->name('clientes-edit');
         Route::patch('/clientes/modificar/{id}', 'update')->name('clientes-update');
+        Route::get('/clientes/eliminar/{id}', 'destroy')->name('clientes-delete');
     });
 
     Route::controller(FormatosController::class)->group(function(){

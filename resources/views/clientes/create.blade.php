@@ -86,17 +86,11 @@
                         <div class="col-2">
                             <label><b>Domicilio</b></label>
                         </div>
-                        <div class="col-md-4">
-                            <input type="text" name="calle" class="form-control" id="inputCalle" placeholder="Calle" value={{old('calle')}}>
-                            @error('calle')
+                        <div class="col-md-5">
+                            <input type="text" name="direccion" class="form-control" id="inputDireccion" placeholder="Direccion" value={{old('direccion', $cliente->direccion)}}>
+                            @error('direccion')
                                 <small class="text-danger">{{$message}}</small>
                                 <br>
-                            @enderror
-                        </div>
-                        <div class="col-sm-1">
-                            <input type="number" name="nro" class="form-control" id="inputNro" placeholder="Nro." value={{old('nro')}}>
-                            @error('nro')
-                                <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
                     </div>

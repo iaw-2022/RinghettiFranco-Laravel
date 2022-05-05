@@ -89,7 +89,7 @@
                             <label><b>Domicilio</b></label>
                         </div>
                         <div class="col-md-5">
-                            <input type="text" name="direccion" class="form-control" id="inputCalle" placeholder="Calle" value={{old('direccion', $cliente->direccion)}}>
+                            <input type="text" name="direccion" class="form-control" id="inputDireccion" placeholder="Direccion" value={{old('direccion', $cliente->direccion)}}>
                             @error('direccion')
                                 <small class="text-danger">{{$message}}</small>
                                 <br>

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->bigInteger('documento_numero');
             $table->string('correo')->nullable();
             $table->string('telefono')->nullable();
-            $table->string('direccion');
+            $table->string('direccion')->nullable();
             $table->string('IVA');
             $table->string('CUIT')->nullable();
         });

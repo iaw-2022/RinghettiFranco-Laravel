@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Pedido;
-use App\Http\Requests\CursoRequest;
+use App\Http\Requests\ClienteRequest;
+use Exception;
 
 class ClientesController extends Controller
 {
@@ -36,7 +37,7 @@ class ClientesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CursoRequest $request)
+    public function store(ClienteRequest $request)
     {
         $cliente = new Cliente();
 
@@ -46,7 +47,7 @@ class ClientesController extends Controller
         $cliente->documento_numero = $request->docnro;
         $cliente->correo = $request->correo;
         $cliente->telefono = $request->telefono;
-        $cliente->direccion = $request->calle.' '.$request->nro;
+        $cliente->direccion = $request->direccion;
         $cliente->IVA = $request->IVA;
         $cliente->CUIT = $request->CUIT; 
 
@@ -78,7 +79,8 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        return view('clientes.update')->with('cliente',$cliente); 
     }
 
     /**
@@ -88,9 +90,27 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClienteRequest $request, $id)
     {
-        //
+        try{
+            $cliente = Cliente::findOrFail($id);
+            
+            $cliente->nombre = $request->nombre;
+            $cliente->apellido = $request->apellido;
+            $cliente->documento_tipo = $request->doctipo;
+            $cliente->documento_numero = $request->docnro;
+            $cliente->correo = $request->correo;
+            $cliente->telefono = $request->telefono;
+            $cliente->direccion = $request->direccion;
+            $cliente->IVA = $request->IVA;
+            $cliente->CUIT = $request->CUIT; 
+
+            $cliente->save();
+
+            return redirect()->route('clientes-index')->with('success', 'Se modificaron con éxito los datos del cliente.'); 
+        }catch(Exception $ex){
+            return redirect()->back()->with('error', 'Algo salió mal');
+        }
     }
 
     /**

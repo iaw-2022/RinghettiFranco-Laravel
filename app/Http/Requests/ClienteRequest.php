@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\RequiredIf;
 
-class CursoRequest extends FormRequest
+class ClienteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,7 +31,6 @@ class CursoRequest extends FormRequest
             'docnro' => 'required|numeric',
             'correo' => new RequiredIf($this->telefono == null),'email',
             'telefono' => new RequiredIf($this->correo == null),
-            'nro' => 'numeric',
             'IVA' => 'required',
             'CUIT' => new RequiredIf($this->IVA != 'Consumidor final'),'numeric'
         ];

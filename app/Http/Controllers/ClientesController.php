@@ -109,7 +109,7 @@ class ClientesController extends Controller
 
             return redirect()->route('clientes-index')->with('success', 'Se modificaron con éxito los datos del cliente.'); 
         }catch(Exception $ex){
-            return redirect()->back()->with('error', 'Algo salió mal');
+            return redirect()->back()->with('error', 'Algo salió mal.');
         }
     }
 
@@ -121,7 +121,6 @@ class ClientesController extends Controller
      */
     public function destroy($id)
     {
-
         $cliente = Cliente::findOrFail($id);
         $cliente->delete();
         

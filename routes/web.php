@@ -28,6 +28,11 @@ Route::get('/', function() {
 Route::middleware(['auth'])->group(function(){
     Route::controller(MarcasController::class)->group(function(){
         Route::get('/marcas', 'index')->name('marcas-index');
+        Route::get('/marcas/nuevo', 'create')->name('marcas-create');
+        Route::post('/marcas/guardar', 'store')->name('marcas-store');
+        Route::get('/marcas/editar/{id}', 'edit')->name('marcas-edit');
+        Route::patch('/marcas/modificar/{id}', 'update')->name('marcas-update');
+        Route::get('/marcas/eliminar/{id}', 'destroy')->name('marcas-delete');
     });
     
     Route::controller(ClientesController::class)->group(function(){
@@ -42,10 +47,20 @@ Route::middleware(['auth'])->group(function(){
 
     Route::controller(FormatosController::class)->group(function(){
         Route::get('/formatos', 'index')->name('formatos-index');
+        Route::get('/formatos/nuevo', 'create')->name('formatos-create');
+        Route::post('/formatos/guardar', 'store')->name('formatos-store');
+        Route::get('/formatos/editar/{id}', 'edit')->name('formatos-edit');
+        Route::patch('/formatos/modificar/{id}', 'update')->name('formatos-update');
+        Route::get('/formatos/eliminar/{id}', 'destroy')->name('formatos-delete');
     });
 
     Route::controller(ProductosController::class)->group(function(){
         Route::get('/productos', 'index')->name('productos-index');
+        Route::get('/productos/nuevo', 'create')->name('productos-create');
+        Route::post('/productos/guardar', 'store')->name('productos-store');
+        Route::get('/productos/editar/{id}', 'edit')->name('productos-edit');
+        Route::patch('/productos/modificar/{id}', 'update')->name('productos-update');
+        Route::get('/productos/eliminar/{id}', 'destroy')->name('productos-delete');
     });
     
     Route::controller(PresentacionesController::class)->group(function(){

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('descripcion');
             $table->string('unidades')->nullable();
-            $table->integer('cantidad')->default('0');
+            $table->integer('cantidad')->nullable()->default('0');
         });
     }
 

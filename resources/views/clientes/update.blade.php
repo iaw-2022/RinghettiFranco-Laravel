@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-sm-2">
                             <select id="inputDocTipo" name="doctipo" class="form-control">
-                                <option disable @if (old('doctipo', $cliente->documento_tipo) == "Tipo") {{ 'selected' }} @endif>Tipo</option>
+                                <option disabled @if (old('doctipo', $cliente->documento_tipo) == "Tipo") {{ 'selected' }} @endif>Tipo</option>
                                 <option @if (old('doctipo', $cliente->documento_tipo) == "DNI") {{ 'selected' }} @endif>DNI</option>
                                 <option @if (old('doctipo', $cliente->documento_tipo) == "LE") {{ 'selected' }} @endif>LE</option>
                                 <option @if (old('doctipo', $cliente->documento_tipo) == "PASAPORTE") {{ 'selected' }} @endif>PASAPORTE</option>

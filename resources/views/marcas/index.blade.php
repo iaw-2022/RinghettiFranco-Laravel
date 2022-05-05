@@ -11,7 +11,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8"><h2><b>Marcas</b></h2></div>
-                        <div class="col-sm-8"><h2><a href="" type="button" class="btn btn-primary" method="GET">Nueva marca</a></h2></div>
+                        <div class="col-sm-8"><h2><a href="{{route('marcas-create')}}" type="button" class="btn btn-primary" method="GET">Nueva marca</a></h2></div>
                     </div>
                 </div>
           
@@ -35,10 +35,10 @@
                         <tr>
                             <td>{{$marca->nombre}}</td>
                             <td>
-                                <a href="" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
+                                <a href="{{route('marcas-edit', ['id' => $marca->id])}}" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
                             </td>
                             <td>
-                                <a href="" onclick="return confirm('¿Desea eliminar {{$marca->nombre}}?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
+                                <a href="{{route('marcas-delete', ['id' => $marca->id])}}" onclick="return confirm('¿Desea eliminar {{$marca->nombre}}? Se eliminaran todos los productos de la marca.')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
                             </td> 
                         </tr>  
                         @endforeach

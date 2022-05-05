@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-md-4">
                             <input type="text" name="apellido" class="form-control" id="inputApellido" placeholder="Apellido" value={{old('apellido')}}>
-                            @error('nombre')
+                            @error('apellido')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="col-sm-2">
                             <select id="inputDocTipo" name="doctipo" class="form-control">
-                                <option disable @if (old('doctipo') == "Tipo") {{ 'selected' }} @endif>Tipo</option>
+                                <option disabled @if (old('doctipo') == "Tipo") {{ 'selected' }} @endif>Tipo</option>
                                 <option @if (old('doctipo') == "DNI") {{ 'selected' }} @endif>DNI</option>
                                 <option @if (old('doctipo') == "LE") {{ 'selected' }} @endif>LE</option>
                                 <option @if (old('doctipo') == "PASAPORTE") {{ 'selected' }} @endif>PASAPORTE</option>

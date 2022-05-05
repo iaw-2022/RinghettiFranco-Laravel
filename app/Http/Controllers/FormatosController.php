@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Formato;
+use App\Http\Requests\FormatoRequest;
+use Exception;
 
 class FormatosController extends Controller
 {
@@ -25,7 +27,7 @@ class FormatosController extends Controller
      */
     public function create()
     {
-        //
+        return view('formatos.create');
     }
 
     /**
@@ -34,9 +36,18 @@ class FormatosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormatoRequest $request)
     {
-        //
+        $formato = new Formato();
+        
+        $formato->descripcion = $request->descripcion;
+        $formato->cantidad = $request->cantidad;
+        $formato->unidades = $request->unidades;
+
+        $formato->save();
+
+        return redirect()->route('formatos-index')->with('success', 'Se agregó con éxito el nuevo formato.');
+    
     }
 
     /**
@@ -58,7 +69,8 @@ class FormatosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $formato = Formato::findOrFail($id);
+        return view('formatos.update')->with('formato',$formato);
     }
 
     /**
@@ -70,7 +82,19 @@ class FormatosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $formato = Formato::findOrFail($id);
+
+            $formato->descripcion = $request->descripcion;
+            $formato->cantidad = $request->cantidad;
+            $formato->unidades = $request->unidades;
+
+            $formato->save();
+
+            return redirect()->route('formatos-index')->with('success', 'Se modificó con éxito el formato.'); 
+        }catch(Exception $ex){
+            return redirect()->back()->with('error', 'Algo salió mal.');
+        }
     }
 
     /**
@@ -81,6 +105,10 @@ class FormatosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $formato = Formato::findOrFail($id);
+        $formato->delete();
+        
+        return redirect()->route('formatos-index')->with('success', 'Se elimino con éxito el formato.');
+    
     }
 }

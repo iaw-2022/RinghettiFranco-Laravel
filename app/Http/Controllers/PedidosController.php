@@ -14,7 +14,6 @@ class PedidosController extends Controller
      */
     public function index()
     {
-        
         $pedidos = Pedido::All()->SortBy('cliente_id');
         return view('pedidos.index')->with('pedidos',$pedidos);
     }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Marca;
+use App\Http\Requests\MarcaRequest;
+use Exception;
 
 class MarcasController extends Controller
 {
@@ -25,7 +27,7 @@ class MarcasController extends Controller
      */
     public function create()
     {
-        //
+        return view('marcas.create');
     }
 
     /**
@@ -34,9 +36,15 @@ class MarcasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MarcaRequest $request)
     {
-        //
+        $marca = new Marca();
+        
+        $marca->nombre = $request->nombre;
+
+        $marca->save();
+
+        return redirect()->route('marcas-index')->with('success', 'Se agregó con éxito la nueva marca.');
     }
 
     /**
@@ -58,7 +66,8 @@ class MarcasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $marca = Marca::findOrFail($id);
+        return view('marcas.update')->with('marca',$marca); 
     }
 
     /**
@@ -68,9 +77,19 @@ class MarcasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MarcaRequest $request, $id)
     {
-        //
+        try{
+            $marca = Marca::findOrFail($id);
+
+            $marca->nombre = $request->nombre;
+
+            $marca->save();
+
+            return redirect()->route('marcas-index')->with('success', 'Se modificó con éxito la marca.'); 
+        }catch(Exception $ex){
+            return redirect()->back()->with('error', 'Algo salió mal.');
+        }
     }
 
     /**
@@ -81,6 +100,9 @@ class MarcasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $marca = Marca::findOrFail($id);
+        $marca->delete();
+        
+        return redirect()->route('marcas-index')->with('success', 'Se elimino con éxito la marca.');
     }
 }

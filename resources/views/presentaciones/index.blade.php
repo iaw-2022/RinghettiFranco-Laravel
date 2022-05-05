@@ -11,7 +11,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8"><h2><b>Productos</b></h2></div>
-                        <div class="col-sm-8"><h2><a href="" type="button" class="btn btn-primary" method="GET">Agregar producto</a></h2></div>
+                        <div class="col-sm-8"><h2><a href="{{route('presentaciones-create')}}" type="button" class="btn btn-primary" method="GET">Agregar producto</a></h2></div>
                     </div>
                 </div>
           
@@ -43,10 +43,10 @@
                             <td>{{$presentacion->formato->descripcion}} {{$presentacion->formato->cantidad}} {{$presentacion->formato->unidades}}</td>
                             <td>${{$presentacion->precio}}</td>
                             <td>
-                                <a href="" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
+                                <a href="{{route('presentaciones-edit', ['id' => $presentacion->id])}}" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
                             </td>
                             <td>
-                                <a href="" onclick="return confirm('¿Desea eliminar {{$presentacion->producto->nombre}}  {{$presentacion->marca->nombre}} en {{$presentacion->formato->descripcion}} {{$presentacion->formato->cantidad}} {{$presentacion->formato->unidades}}?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
+                                <a href="{{route('presentaciones-delete', ['id' => $presentacion->id])}}" onclick="return confirm('¿Desea eliminar {{$presentacion->producto->nombre}}  {{$presentacion->marca->nombre}} en {{$presentacion->formato->descripcion}} {{$presentacion->formato->cantidad}} {{$presentacion->formato->unidades}}?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
                             </td>
                         </tr>   
                         @endforeach

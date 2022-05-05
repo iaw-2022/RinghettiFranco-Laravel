@@ -44,7 +44,7 @@ class ProductosController extends Controller
 
         $producto->save();
 
-        return redirect()->route('productos-index')->with('success', 'Se agregó con éxito el nuevo producto.');
+        return redirect()->route('productos-index')->with('success', 'Se agregó con éxito el nuevo tipo de producto.');
     }
 
     /**
@@ -86,7 +86,7 @@ class ProductosController extends Controller
 
             $producto->save();
 
-            return redirect()->route('productos-index')->with('success', 'Se modificó con éxito el producto.'); 
+            return redirect()->route('productos-index')->with('success', 'Se modificó con éxito el tipo de producto.'); 
         }catch(Exception $ex){
             return redirect()->back()->with('error', 'Algo salió mal.');
         }
@@ -103,6 +103,6 @@ class ProductosController extends Controller
         $producto = Producto::findOrFail($id);
         $producto->delete();
         
-        return redirect()->route('productos-index')->with('success', 'Se elimino con éxito al producto.');
+        return redirect()->route('productos-index')->with('success', 'Se elimino con éxito al tipo de producto.');
     }
 }

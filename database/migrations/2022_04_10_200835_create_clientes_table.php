@@ -20,11 +20,11 @@ return new class extends Migration
             $table->string('apellido');
             $table->string('documento_tipo');
             $table->bigInteger('documento_numero');
-            $table->string('correo');
-            $table->string('telefono');
+            $table->string('correo')->nullable();
+            $table->string('telefono')->nullable();
             $table->string('direccion');
             $table->string('IVA');
-            $table->string('CUIT');
+            $table->string('CUIT')->nullable();
         });
     }
 

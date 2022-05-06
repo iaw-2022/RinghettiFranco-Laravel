@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\Cliente;
+use App\Http\Requests\PedidoRequest;
+use Exception;
 
 class PedidosController extends Controller
 {
@@ -25,7 +28,8 @@ class PedidosController extends Controller
      */
     public function create()
     {
-        //
+        $clientes = Cliente::All();
+        return view('pedidos.create')->with('clientes',$clientes);
     }
 
     /**
@@ -34,9 +38,16 @@ class PedidosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PedidoRequest $request)
     {
-        //
+        $pedido = new Pedido();
+
+        $pedido->fecha_realizado = $request->fecha_realizado;
+        $pedido->cliente_id = $request->cliente_id;
+
+        $pedido->save();
+
+        return redirect()->route('pedidos-index')->with('success', 'Se agregó con éxito el nuevo pedido.');
     }
 
     /**
@@ -58,7 +69,11 @@ class PedidosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pedido = Pedido::findOrFail($id);
+        $clientes = Cliente::All();
+        return view('presentaciones.update')
+            ->with('pedido', $pedido)
+            ->with('clientes', $clientes);
     }
 
     /**
@@ -70,7 +85,19 @@ class PedidosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $pedido = Pedido::findOrFail($id);
+
+            $pedido->fecha_realizado = $request->fecha_realizado;
+            $pedido->fecha_entregado = $request->fecha_entregado;
+            $pedido->cliente_id = $request->cliente_id;
+
+            $pedido->save();
+
+            return redirect()->route('pedidos-index')->with('success', 'Se modificó con éxito el nuevo pedido.'); 
+        }catch(Exception $ex){
+            return redirect()->back()->with('error', 'Algo salió mal.');
+        }
     }
 
     /**
@@ -81,6 +108,9 @@ class PedidosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pedido = Pedido::findOrFail($id);
+        $pedido->delete();
+        
+        return redirect()->route('pedidos-index')->with('success', 'Se elimino con éxito el pedido.');
     }
 }

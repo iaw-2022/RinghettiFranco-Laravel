@@ -16,11 +16,16 @@
                 <form action="{{route('productos-store')}}" method="POST">
                     @csrf
 
-                    <div class="row">
-                        <input type="text" name="nombre" class="form-control" id="inputNombre" placeholder="Nombre" value={{old('nombre')}}>
-                        @error('nombre')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <label><b>Nombre</b></label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="nombre" class="form-control" id="inputNombre" placeholder="Nombre" value={{old('nombre')}}>
+                            @error('nombre')
+                                <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
                     </div>
                     <br>
 

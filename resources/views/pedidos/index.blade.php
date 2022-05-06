@@ -11,7 +11,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8"><h2><b>Pedidos</b></h2></div>
-                        <div class="col-sm-8"><h2><a href="" type="button" class="btn btn-primary" method="GET">Nuevo pedido</a></h2></div>
+                        <div class="col-sm-8"><h2><a href="{{route('pedidos-create')}}" type="button" class="btn btn-primary" method="GET">Nuevo pedido</a></h2></div>
                     </div>
                 </div>
           
@@ -39,13 +39,10 @@
                             <td>{{$pedido->fecha_realizado}}</td>
                             <td>{{$pedido->fecha_entregado}}</td>
                             <td>
-                                <a href="" class="view" title="View" data-toggle="tooltip"><x-bi-info-circle-fill /></a>
+                                <a href="{{route('pedidos-edit', ['id' => $pedido->id])}}" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
                             </td>
                             <td>
-                                <a href="" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
-                            </td>
-                            <td>
-                                <a href="" onclick="return confirm('¿Desea eliminar el pedido?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
+                                <a href="{{route('pedidos-delete', ['id' => $pedido->id])}}" onclick="return confirm('¿Desea eliminar el pedido?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
                             </td>
                         </tr>   
                         @endforeach

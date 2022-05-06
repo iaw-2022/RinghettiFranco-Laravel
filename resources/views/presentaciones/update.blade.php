@@ -19,7 +19,10 @@
                     @method('patch')
 
                     <div class="row align-items-center">
-                        <div class="col-md-4">
+                        <div class="col-1">
+                            <label><b>Producto</b></label>
+                        </div>
+                        <div class="col-md-3">
                             <select id="inputProductoID" name="producto_id" class="form-control">
                                 <option value="" disabled @if (old('producto_id', $presentacion->producto_id) == "") {{ 'selected' }} @endif>Producto</option>
                                 @foreach($productos as $producto)
@@ -30,7 +33,7 @@
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <select id="inputMarcaID" name="marca_id" class="form-control">
                                 <option value="" disabled @if (old('marca_id', $presentacion->marca_id) == "") {{ 'selected' }} @endif>Marca</option>
                                 @foreach($marcas as $marca)
@@ -41,7 +44,7 @@
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <select id="inputFormatoID" name="formato_id" class="form-control">
                                 <option value="" disabled @if (old('formato_id', $presentacion->formato_id) == "") {{ 'selected' }} @endif>Formato</option>
                                 @foreach($formatos as $formato)
@@ -54,20 +57,26 @@
                         </div>
                     </div>
                     <br>
-                    
-                    <div>
-                        <input type="number" name="precio" class="form-control" id="inputPrecio" placeholder="0.00" value={{old('precio', $presentacion->precio)}}>
-                        @error('precio')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
-                    </div>
-                    <br>
 
-                    <div>
-                        <input type="number" name="stock" class="form-control" id="inputStock" placeholder="0" value={{old('stock', $presentacion->stock)}}>
-                        @error('precio')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
+                    <div class="row align-items-center">
+                        <div class="col-1">
+                            <label><b>Precio</b></label>
+                        </div>
+                        <div class="col-1">
+                            <input type="number" name="precio" class="form-control" id="inputPrecio" placeholder="0.00" value={{old('precio')}}>
+                            @error('precio')
+                                <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
+                        <div class="col-1">
+                            <label><b>Stock</b></label>
+                        </div>
+                        <div class="col-1">
+                            <input type="number" name="stock" class="form-control" id="inputStock" placeholder="0" value={{old('stock', $presentacion->stock)}}>
+                            @error('precio')
+                                <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
                     </div>
                     <br>
 

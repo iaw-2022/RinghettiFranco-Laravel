@@ -71,7 +71,7 @@ class PedidosController extends Controller
     {
         $pedido = Pedido::findOrFail($id);
         $clientes = Cliente::All();
-        return view('presentaciones.update')
+        return view('pedidos.update')
             ->with('pedido', $pedido)
             ->with('clientes', $clientes);
     }

@@ -67,9 +67,9 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/presentaciones', 'index')->name('presentaciones-index');
         Route::get('/presentaciones/nuevo', 'create')->name('presentaciones-create');
         Route::post('/presentaciones/guardar', 'store')->name('presentaciones-store');
-        Route::get('/productos/editar/{id}', 'edit')->name('presentaciones-edit');
-        Route::patch('/productos/modificar/{id}', 'update')->name('presentaciones-update');
-        Route::get('/productos/eliminar/{id}', 'destroy')->name('presentaciones-delete');
+        Route::get('/presentaciones/editar/{id}', 'edit')->name('presentaciones-edit');
+        Route::patch('/presentaciones/modificar/{id}', 'update')->name('presentaciones-update');
+        Route::get('/presentaciones/eliminar/{id}', 'destroy')->name('presentaciones-delete');
     });
 
     Route::controller(PedidosController::class)->group(function(){

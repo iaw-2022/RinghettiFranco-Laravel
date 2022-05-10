@@ -16,7 +16,7 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        $productos = Producto::All()->SortBy('nombre');
+        $productos = Producto::All()->sortBy('nombre');
         return view('productos.index')->with('productos',$productos);
     }
 

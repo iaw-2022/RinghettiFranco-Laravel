@@ -41,7 +41,7 @@
                                 <a href="{{route('pedidos-show', ['id' => $pedido->id])}}" class="view" title="View" data-toggle="tooltip"><x-bi-info-circle-fill /></a>
                             </td>
                             <td>
-                                <a href="{{route('pedidos-edit', ['id' => $pedido->id])}}" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
+                                <a href="{{route('pedidos-edit', ['id' => $pedido->id])}}" class="edit" title="Edit" data-toggle="tooltip"><x-bi-box2-heart-fill /></a>
                             </td>
                             <td>
                                 <a href="{{route('pedidos-delete', ['id' => $pedido->id])}}" onclick="return confirm('¿Desea eliminar el pedido?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>

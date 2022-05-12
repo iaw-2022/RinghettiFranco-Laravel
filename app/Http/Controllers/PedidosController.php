@@ -31,11 +31,7 @@ class PedidosController extends Controller
      */
     public function create()
     {
-        $clientes = Cliente::All();
-        $presentaciones = Presentacion::All();
-        return view('pedidos.create')
-            ->with('clientes',$clientes)
-            ->with('presentaciones',$presentaciones);
+        //
     }
 
     /**
@@ -46,14 +42,7 @@ class PedidosController extends Controller
      */
     public function store(PedidoRequest $request)
     {
-        $pedido = new Pedido();
-
-        $pedido->fecha_realizado = $request->fecha_realizado;
-        $pedido->cliente_id = $request->cliente_id;
-
-        $pedido->save();
-
-        return redirect()->route('pedidos-index')->with('success', 'Se agregó con éxito el nuevo pedido.');
+        //
     }
 
     /**

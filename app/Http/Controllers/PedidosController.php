@@ -9,6 +9,7 @@ use App\Models\Encargado;
 use App\Models\Presentacion;
 use App\Http\Requests\PedidoRequest;
 use Exception;
+use Illuminate\Support\Carbon;
 
 class PedidosController extends Controller
 {
@@ -78,13 +79,17 @@ class PedidosController extends Controller
      */
     public function edit($id)
     {
-        $pedido = Pedido::findOrFail($id);
-        $encargados = Encargado::all()->where('pedido_id',$id);
-        $clientes = Cliente::All();
-        return view('pedidos.update')
-            ->with('pedido', $pedido)
-            ->with('encargados', $encargados)
-            ->with('clientes', $clientes);
+        try{
+            $pedido = Pedido::findOrFail($id);
+
+            $pedido->fecha_entregado = Carbon::now()->format('Y-m-d');
+
+            $pedido->save();
+
+            return redirect()->route('pedidos-index')->with('success', 'Se notificó con éxito la entrega del pedido.'); 
+        }catch(Exception $ex){
+            return redirect()->back()->with('error', 'Algo salió mal.');
+        }
     }
 
     /**
@@ -96,19 +101,7 @@ class PedidosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
-            $pedido = Pedido::findOrFail($id);
-
-            $pedido->fecha_realizado = $request->fecha_realizado;
-            $pedido->fecha_entregado = $request->fecha_entregado;
-            $pedido->cliente_id = $request->cliente_id;
-
-            $pedido->save();
-
-            return redirect()->route('pedidos-index')->with('success', 'Se modificó con éxito el nuevo pedido.'); 
-        }catch(Exception $ex){
-            return redirect()->back()->with('error', 'Algo salió mal.');
-        }
+        //
     }
 
     /**
@@ -125,5 +118,4 @@ class PedidosController extends Controller
         return redirect()->route('pedidos-index')->with('success', 'Se elimino con éxito el pedido.');
     }
 
-    
 }

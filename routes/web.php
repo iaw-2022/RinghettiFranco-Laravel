@@ -74,11 +74,8 @@ Route::middleware(['auth'])->group(function(){
 
     Route::controller(PedidosController::class)->group(function(){
         Route::get('/pedidos', 'index')->name('pedidos-index');
-        Route::get('/pedidos/nuevo', 'create')->name('pedidos-create');
-        Route::post('/pedidos/guardar', 'store')->name('pedidos-store');
         Route::get('/pedidos/mostrar/{id}', 'show')->name('pedidos-show');
         Route::get('/pedidos/editar/{id}', 'edit')->name('pedidos-edit');
-        Route::patch('/pedidos/modificar/{id}', 'update')->name('pedidos-update');
         Route::get('/pedidos/eliminar/{id}', 'destroy')->name('pedidos-delete');
     });
 });

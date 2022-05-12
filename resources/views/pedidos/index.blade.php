@@ -11,7 +11,6 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8"><h2><b>Pedidos</b></h2></div>
-                        <div class="col-sm-8"><h2><a href="{{route('pedidos-create')}}" type="button" class="btn btn-primary" method="GET">Nuevo pedido</a></h2></div>
                     </div>
                 </div>
           

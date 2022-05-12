@@ -26,8 +26,8 @@
                 <table class="table table-striped table-hover table-bordered" id="myTable">
                     <thead>
                         <tr>
-                            <th scope="col">Detalle</th>
-                            <th scope="col">Tamaño</th>
+                            <th style="width: 50%" scope="col">Detalle</th>
+                            <th style="width: 50%" scope="col">Tamaño</th>
                         </tr>
                     </thead>
                 

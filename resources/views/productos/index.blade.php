@@ -26,7 +26,7 @@
                 <table class="table table-striped table-hover table-bordered" id="myTable">
                     <thead>
                         <tr>
-                            <th scope="col">Producto</th>
+                            <th style="width: 100%" scope="col">Producto</th>
                         </tr>
                     </thead>
                 

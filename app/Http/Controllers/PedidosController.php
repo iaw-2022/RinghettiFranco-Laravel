@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pedido;
 use App\Models\Cliente;
+use App\Models\Encargado;
+use App\Models\Presentacion;
 use App\Http\Requests\PedidoRequest;
 use Exception;
 
@@ -29,7 +31,10 @@ class PedidosController extends Controller
     public function create()
     {
         $clientes = Cliente::All();
-        return view('pedidos.create')->with('clientes',$clientes);
+        $presentaciones = Presentacion::All();
+        return view('pedidos.create')
+            ->with('clientes',$clientes)
+            ->with('presentaciones',$presentaciones);
     }
 
     /**
@@ -58,7 +63,11 @@ class PedidosController extends Controller
      */
     public function show($id)
     {
-        //
+        $pedido = Pedido::findOrFail($id);
+        $encargados = Encargado::all()->where('pedido_id',$id);
+        return view('pedidos.show')
+            ->with('pedido', $pedido)
+            ->with('encargados', $encargados);
     }
 
     /**
@@ -70,9 +79,11 @@ class PedidosController extends Controller
     public function edit($id)
     {
         $pedido = Pedido::findOrFail($id);
+        $encargados = Encargado::all()->where('pedido_id',$id);
         $clientes = Cliente::All();
         return view('pedidos.update')
             ->with('pedido', $pedido)
+            ->with('encargados', $encargados)
             ->with('clientes', $clientes);
     }
 
@@ -113,4 +124,6 @@ class PedidosController extends Controller
         
         return redirect()->route('pedidos-index')->with('success', 'Se elimino con éxito el pedido.');
     }
+
+    
 }

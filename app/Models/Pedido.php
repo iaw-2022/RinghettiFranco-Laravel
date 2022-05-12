@@ -21,6 +21,10 @@ class Pedido extends Model
         return $this->belongsTo('App\Models\Cliente');
     }
 
+    public function Encargados(){
+        return $this->hasMany('App\Models\Encargado');
+    }
+
     protected $table = "pedidos";
 
     use HasFactory;

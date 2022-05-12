@@ -26,7 +26,7 @@
                 <table class="table table-striped table-hover table-bordered" id="myTable">
                     <thead>
                         <tr>
-                            <th scope="col">Nombre</th>
+                            <th style="width: 100%" scope="col">Nombre</th>
                         </tr>
                     </thead>
                 

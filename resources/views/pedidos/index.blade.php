@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    <title> Clientes </title>
+    <title> Pedidos </title>
 @endsection
 
 @section('contenido')
@@ -26,9 +26,9 @@
                 <table class="table table-striped table-hover table-bordered" id="myTable">
                     <thead>
                         <tr>
-                            <th scope="col">Cliente</th>
-                            <th scope="col">Realizado</th>
-                            <th scope="col">Entregado</th>
+                            <th style="width: 60%" scope="col">Cliente</th>
+                            <th style="width: 20%" scope="col">Realizado</th>
+                            <th style="width: 20%" scope="col">Entregado</th>
                         </tr>
                     </thead>
                 
@@ -38,6 +38,9 @@
                             <td>{{$pedido->cliente->apellido}}, {{$pedido->cliente->nombre}}</td>
                             <td>{{$pedido->fecha_realizado}}</td>
                             <td>{{$pedido->fecha_entregado}}</td>
+                            <td>
+                                <a href="{{route('pedidos-show', ['id' => $pedido->id])}}" class="view" title="View" data-toggle="tooltip"><x-bi-info-circle-fill /></a>
+                            </td>
                             <td>
                                 <a href="{{route('pedidos-edit', ['id' => $pedido->id])}}" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
                             </td>

@@ -26,11 +26,11 @@
                 <table class="table table-striped table-hover table-bordered" id="myTable">
                     <thead>
                         <tr>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Marca</th>
-                            <th scope="col">Formato</th>
-                            <th scope="col">Precio</th>
+                            <th style="width: 10%" scope="col">Stock</th>
+                            <th style="width: 30%" scope="col">Producto</th>
+                            <th style="width: 25%" scope="col">Marca</th>
+                            <th style="width: 25%" scope="col">Formato</th>
+                            <th style="width: 10%" scope="col">Precio</th>
                         </tr>
                     </thead>
                 
@@ -38,8 +38,8 @@
                         @foreach($presentaciones as $presentacion)
                         <tr>
                             <td>{{$presentacion->stock}}</td>
-                            <td>{{$presentacion->marca->nombre}}</td>
                             <td>{{$presentacion->producto->nombre}}</td>
+                            <td>{{$presentacion->marca->nombre}}</td>
                             <td>{{$presentacion->formato->descripcion}} {{$presentacion->formato->cantidad}} {{$presentacion->formato->unidades}}</td>
                             <td>${{$presentacion->precio}}</td>
                             <td>

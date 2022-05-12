@@ -26,10 +26,10 @@
                 <table class="table table-striped table-hover table-bordered" id="myTable">
                     <thead>
                         <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Documento</th>
-                            <th scope="col">Correo</th>
-                            <th scope="col">Sit. IVA</th>
+                            <th style="width: 37%" scope="col">Nombre</th>
+                            <th style="width: 16%" scope="col">Documento</th>
+                            <th style="width: 37%" scope="col">Correo</th>
+                            <th style="width: 10%" scope="col">Sit. IVA</th>
                         </tr>
                     </thead>
                 

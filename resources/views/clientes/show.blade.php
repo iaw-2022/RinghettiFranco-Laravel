@@ -53,7 +53,7 @@
                     </thead>
                 
                     <tbody>
-                         @foreach($pedidos as $pedido)
+                        @foreach($pedidos as $pedido)
                         <tr>
                             <td>{{$pedido->fecha_realizado}}</td>
                             <td>{{$pedido->fecha_entregado}}</td>

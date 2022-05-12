@@ -19,7 +19,7 @@
                     @method('patch')
 
                     <div class="row align-items-center">
-                        <div class="col-1">
+                        <div class="col-2">
                             <label><b>Cliente</b></label>
                         </div>
                         <div class="col-md-4">

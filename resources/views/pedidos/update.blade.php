@@ -26,7 +26,7 @@
                             <select id="inputClienteID" name="cliente_id" class="form-control">
                                 <option value="" disabled @if (old('cliente_id', $pedido->cliente_id) == "") {{ 'selected '}} @endif>Cliente</option>
                                 @foreach($clientes as $cliente)
-                                    <option value="{{$cliente->id}}" @if (old('cliente_id', $pedido->cliente_id) == "{{$cliente->id}}") {{ 'selected '}} @endif>{{$cliente->apellido}}, {{$cliente->nombre}}</option>
+                                    <option value="{{$cliente->id}}" @if (old('cliente_id', $pedido->cliente_id) == "{{$cliente->id}}") {{ 'selected '}} @endif>"{{$cliente->apellido}}", "{{$cliente->nombre}}"</option>
                                 @endforeach
                             </select>
                             @error('cliente_id')

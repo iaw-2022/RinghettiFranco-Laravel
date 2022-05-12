@@ -23,7 +23,7 @@
                             <label><b>Descripción</b></label>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" name="descripcion" class="form-control" id="inputDescripcion" placeholder="Descripción" value={{old('descripcion', $formato->descripcion)}}>
+                            <input type="text" name="descripcion" class="form-control" id="inputDescripcion" placeholder="Descripción" value="{{old('descripcion', $formato->descripcion)}}">
                             @error('descripcion')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror

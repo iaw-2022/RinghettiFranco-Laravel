@@ -23,13 +23,13 @@
                             <label><b>Nombre</b></label>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" name="apellido" class="form-control" id="inputApellido" placeholder="Apellido" value={{old('apellido', $cliente->apellido)}}>
+                            <input type="text" name="apellido" class="form-control" id="inputApellido" placeholder="Apellido" value="{{old('apellido', $cliente->apellido)}}">
                             @error('nombre')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
                         <div class="col-md-4">
-                            <input type="text" name="nombre" class="form-control" id="inputNombre" placeholder="Nombre" value={{old('nombre', $cliente->nombre)}}>
+                            <input type="text" name="nombre" class="form-control" id="inputNombre" placeholder="Nombre" value="{{old('nombre', $cliente->nombre)}}">
                             @error('apellido')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -43,7 +43,6 @@
                         </div>
                         <div class="col-sm-2">
                             <select id="inputDocTipo" name="doctipo" class="form-control">
-                                <option disabled @if (old('doctipo', $cliente->documento_tipo) == "Tipo") {{ 'selected' }} @endif>Tipo</option>
                                 <option @if (old('doctipo', $cliente->documento_tipo) == "DNI") {{ 'selected' }} @endif>DNI</option>
                                 <option @if (old('doctipo', $cliente->documento_tipo) == "LE") {{ 'selected' }} @endif>LE</option>
                                 <option @if (old('doctipo', $cliente->documento_tipo) == "PASAPORTE") {{ 'selected' }} @endif>PASAPORTE</option>
@@ -77,7 +76,7 @@
                             <label for="inputTelefono"><b>Teléfono</b></label>
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="telefono" class="form-control" id="inputTelefono" placeholder="+54 9 (123) 154123456" value={{old('telefono', $cliente->telefono)}}>
+                            <input type="text" name="telefono" class="form-control" id="inputTelefono" placeholder="+54 9 (123) 154123456" value="{{old('telefono', $cliente->telefono)}}">
                             @error('telefono')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -89,7 +88,7 @@
                             <label><b>Domicilio</b></label>
                         </div>
                         <div class="col-md-5">
-                            <input type="text" name="direccion" class="form-control" id="inputDireccion" placeholder="Direccion" value={{old('direccion', $cliente->direccion)}}>
+                            <input type="text" name="direccion" class="form-control" id="inputDireccion" placeholder="Direccion" value="{{old('direccion', $cliente->direccion)}}">
                             @error('direccion')
                                 <small class="text-danger">{{$message}}</small>
                                 <br>

@@ -20,11 +20,12 @@ class ClienteSeeder extends Seeder
             'apellido'=> 'Ringhetti',
             'documento_tipo' => 'DNI',
             'documento_numero' => '41547459',
-            'correo' => 'francuito473@gmail.com',
+            'email' => 'francuito473@gmail.com',
             'telefono' => '+5492914728941',
             'direccion' => 'Falcon 473',
             'IVA' => 'Cons. Final',
-            'CUIT' => '20415474599'
+            'CUIT' => '20415474599',
+            'password' => '12345678'
         ]);
     }
 }

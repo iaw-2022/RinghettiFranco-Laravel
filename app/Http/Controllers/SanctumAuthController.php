@@ -5,25 +5,35 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use App\Models\Cliente;
 
 class SanctumAuthController extends Controller
 {
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'nombre' => 'required',
+            'apellido'=> 'required',
+            'doctipo' => 'required',
+            'docnro' => 'required|numeric',
             'email' => 'required|confirmed|unique:users',
             'password' => 'required|confirmed'
         ]);
 
-        $user = new User();
+        $cliente = new Cliente();
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        $cliente->nombre = $request->nombre;
+        $cliente->apellido = $request->apellido;
+        $cliente->documento_tipo = $request->doctipo;
+        $cliente->documento_numero = $request->docnro;
+        $cliente->email = $request->email;
+        $cliente->telefono = $request->telefono;
+        $cliente->direccion = $request->direccion;
+        $cliente->IVA = 'Monotributista';
+        $cliente->CUIT = $request->CUIT; 
+        $cliente->password = Hash::make($request->password);
 
-        $user->save();
+        $cliente->save();
 
         return response()->json(["El usuario ha sido creado correctamente."], 201);
     }
@@ -35,11 +45,11 @@ class SanctumAuthController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::where('email','=', $request->email)->first();
+        $cliente = Cliente::where('email','=', $request->email)->first();
 
-        if(isset($user)){
-            if(Hash::check($request->password, $user->password)){
-                $token = $user->createToken("auth_token")->plainTextToken;
+        if(isset($cliente)){
+            if(Hash::check($request->password, $cliente->password)){
+                $token = $cliente->createToken("auth_token")->plainTextToken;
                 return response()->json(["Se inicio sesión correctamente.", "access_token" => $token], 202);
             }else{
                 return response()->json(["La contraseña provista es incorrecta.", "error" => true], 401); 

@@ -23,6 +23,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put("/modify", "modify");
         Route::put("/passwordchange", "passwordchange");
         Route::post("/logout", "logout");
-        Route::delete("/unsuscribe", "unsuscribe");
+        Route::delete("/signout", "signout");
     });
 });

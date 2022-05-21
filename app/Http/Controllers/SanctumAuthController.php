@@ -25,8 +25,8 @@ class SanctumAuthController extends Controller
 
         $cliente->nombre = $request->nombre;
         $cliente->apellido = $request->apellido;
-        $cliente->documento_tipo = $request->doctipo;
-        $cliente->documento_numero = $request->docnro;
+        $cliente->documento_tipo = $request->documento_tipo;
+        $cliente->documento_numero = $request->documento_numero;
         $cliente->email = $request->email;
         $cliente->telefono = $request->telefono;
         $cliente->direccion = $request->direccion;
@@ -36,7 +36,7 @@ class SanctumAuthController extends Controller
 
         $cliente->save();
 
-        return response()->json(["El usuario ha sido creado correctamente.", $cliente], 201);
+        return response()->json(["El usuario ha sido creado correctamente.", $cliente], 202);
     }
 
     public function login(Request $request)
@@ -116,7 +116,7 @@ class SanctumAuthController extends Controller
         return response()->json(["status" => 1, "Se ha cerrado sesión correctamente."], 200);
     }
 
-    public function unsuscribe()
+    public function signout()
     {
         Auth::user()->tokens()->delete();
         Auth::user()->delete();

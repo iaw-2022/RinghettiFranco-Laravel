@@ -29,7 +29,7 @@ class SanctumAuthController extends Controller
         $cliente->email = $request->email;
         $cliente->telefono = $request->telefono;
         $cliente->direccion = $request->direccion;
-        $cliente->IVA = 'Monotributista';
+        $cliente->IVA = 'Consumidor final';
         $cliente->CUIT = $request->CUIT; 
         $cliente->password = Hash::make($request->password);
 

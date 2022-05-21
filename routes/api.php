@@ -14,10 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post("/register", [SanctumAuthController::class, "register"]);
+Route::post("/signin", [SanctumAuthController::class, "signin"]);
 Route::post("/login", [SanctumAuthController::class, "login"]);
 
-Route::middleware('auth:sanctum')->group(function(){
-    Route::post("/profile", [SanctumAuthController::class, "profile"]);  
-    Route::post("/logout", [SanctumAuthController::class, "logout"]);   
+Route::middleware('auth:sanctum')->group(function () {
+    Route::controller(SanctumAuthController::class)->group(function () {
+        Route::post("/profile", "profile");
+        Route::put("/modify", "modify");
+        Route::put("/passwordchange", "passwordchange");
+        Route::post("/logout", "logout");
+        Route::delete("/unsuscribe", "unsuscribe");
+    });
 });

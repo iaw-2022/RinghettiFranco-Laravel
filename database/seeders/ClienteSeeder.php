@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ClienteSeeder extends Seeder
 {
@@ -25,7 +26,7 @@ class ClienteSeeder extends Seeder
             'direccion' => 'Falcon 473',
             'IVA' => 'Cons. Final',
             'CUIT' => '20415474599',
-            'password' => '12345678'
+            'password' => Hash::make('12345678')
         ]);
     }
 }

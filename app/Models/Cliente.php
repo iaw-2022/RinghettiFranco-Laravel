@@ -24,11 +24,11 @@ class Cliente extends Model
         'direccion',
         'IVA',
         'CUIT',
+        'password'
     ];    
 
     protected $hidden = [
         'remember_token',
-        'password'
     ];
 
     public function Pedidos(){

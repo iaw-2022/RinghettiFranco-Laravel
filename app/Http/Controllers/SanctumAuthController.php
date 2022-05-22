@@ -36,7 +36,7 @@ class SanctumAuthController extends Controller
 
         $cliente->save();
 
-        return response()->json(["El usuario ha sido creado correctamente.", $cliente], 202);
+        return response()->json([$cliente], 201);
     }
 
     public function login(Request $request)
@@ -56,7 +56,7 @@ class SanctumAuthController extends Controller
                 return response()->json(["La contraseña provista es incorrecta.", "error" => true], 401);
             }
         } else {
-            return response()->json(["No existe el usuario provisto.", "error" => true], 500);
+            return response()->json(["No existe el usuario provisto.", "error" => true], 404);
         }
     }
 
@@ -82,7 +82,7 @@ class SanctumAuthController extends Controller
 
             $cliente->update($request->all());
 
-            return response()->json([$cliente], 201);
+            return response()->json([$cliente], 202);
         } catch (Exception $ex) {
             return response()->json(["error" => true], 500);
         }
@@ -113,13 +113,13 @@ class SanctumAuthController extends Controller
     public function logout()
     {
         Auth::user()->tokens()->delete();
-        return response()->json(["status" => 1, "Se ha cerrado sesión correctamente."], 200);
+        return response()->json(["status" => 1, "Se ha cerrado sesión correctamente."], 202);
     }
 
     public function signout()
     {
         Auth::user()->tokens()->delete();
         Auth::user()->delete();
-        return response()->json(["status" => 1, "Se ha cerrado su cuenta correctamente."], 200);
+        return response()->json(["status" => 1, "Se ha cerrado su cuenta correctamente."], 202);
     }
 }

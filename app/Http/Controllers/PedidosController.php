@@ -8,8 +8,10 @@ use App\Models\Cliente;
 use App\Models\Encargado;
 use App\Models\Presentacion;
 use App\Http\Requests\PedidoRequest;
+use App\Http\Resources\EncargadoResource;
 use Exception;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PedidosController extends Controller
 {
@@ -21,7 +23,7 @@ class PedidosController extends Controller
     public function index()
     {
         $pedidos = Pedido::All()->SortBy('cliente_id');
-        return view('pedidos.index')->with('pedidos',$pedidos);
+        return view('pedidos.index')->with('pedidos', $pedidos);
     }
 
     /**
@@ -35,14 +37,35 @@ class PedidosController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage for the API's endpoint.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PedidoRequest $request)
+    public function store(Request $request)
     {
-        //
+        $pedidorealizado = json_decode($request, false);
+
+        $cliente = Auth::user();
+
+        $nuevopedido = new Pedido();
+
+        $nuevopedido->cliente_id = $cliente->id;
+        $nuevopedido->fecha_realizado = $pedidorealizado->pedido->fecha_realizado;
+
+        $nuevopedido->save();
+
+        foreach($pedidorealizado['encargados']->encargados as $encargado){
+            $nuevoitem = new Encargado();
+
+            $nuevoitem->pedido_id = $nuevopedido->id;
+            $nuevoitem->presentacion_id = $encargado->presentacion_id;
+            $nuevoitem->cantidad = $encargado->cantidad;
+
+            $nuevoitem->save();
+        }
+
+        return response()->jSon([$request], 200);
     }
 
     /**
@@ -54,7 +77,7 @@ class PedidosController extends Controller
     public function show($id)
     {
         $pedido = Pedido::findOrFail($id);
-        $encargados = Encargado::all()->where('pedido_id',$id);
+        $encargados = Encargado::all()->where('pedido_id', $id);
         return view('pedidos.show')
             ->with('pedido', $pedido)
             ->with('encargados', $encargados);
@@ -68,15 +91,15 @@ class PedidosController extends Controller
      */
     public function edit($id)
     {
-        try{
+        try {
             $pedido = Pedido::findOrFail($id);
 
             $pedido->fecha_entregado = Carbon::now()->format('Y-m-d');
 
             $pedido->save();
 
-            return redirect()->route('pedidos-index')->with('success', 'Se notificó con éxito la entrega del pedido.'); 
-        }catch(Exception $ex){
+            return redirect()->route('pedidos-index')->with('success', 'Se notificó con éxito la entrega del pedido.');
+        } catch (Exception $ex) {
             return redirect()->back()->with('error', 'Algo salió mal.');
         }
     }
@@ -103,8 +126,35 @@ class PedidosController extends Controller
     {
         $pedido = Pedido::findOrFail($id);
         $pedido->delete();
-        
+
         return redirect()->route('pedidos-index')->with('success', 'Se elimino con éxito el pedido.');
     }
 
+    /**
+     * Display a listing of the resource for the API's endpoint.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list()
+    {
+        $cliente = Auth::user();
+        return response()->jSon([Pedido::where('cliente_id', $cliente->id)->get()], 200);
+    }
+
+    /**
+     * Display the specified resource for the API's endpoint.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        $encargados = Encargado::where('pedido_id', $pedido->id)->get();
+        if (isset($pedido)) {
+            return response()->jSon(['pedido' => $pedido, 'encargados' => EncargadoResource::collection($encargados)], 200);
+        } else {
+            return response()->jSon(["Hubo un error recuperando los datos del pedido."], 500);
+        }
+    }
 }

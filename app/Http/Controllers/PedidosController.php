@@ -152,7 +152,29 @@ class PedidosController extends Controller
         if (isset($pedido)) {
             return response()->jSon(['pedido' => $pedido, 'encargados' => EncargadoResource::collection($encargados)], 200);
         } else {
-            return response()->jSon(["Hubo un error recuperando los datos del pedido."], 500);
+            return response()->jSon(["No existe el pedido indicado."], 500);
+        }
+    }
+
+    public function cancel($id){
+        $pedido = Pedido::findOrFail($id);
+
+        if (isset($pedido)) {
+
+            $fecharealizado = Carbon::createFromFormat('Y-m-d',  $pedido->fecha_realizado);
+            $fechamargen = $fecharealizado->addDay();
+            $hoy = Carbon::now();
+
+            if($hoy->lte($fechamargen)){
+                $pedido->delete();
+                
+                return response()->jSon(["Se canceló con éxito el pedido."], 200);
+            } else {
+                return response()->jSon(["Paso el período de gracia para la cancelación del pedido."], 406);
+            }
+
+        } else {
+            return response()->jSon(["No existe el pedido indicado."], 500);
         }
     }
 }

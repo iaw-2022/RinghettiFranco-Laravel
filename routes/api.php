@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get("/pedidos", "list");
         Route::get("/pedidos/{id}", "detail");
         Route::post("/pedidos/nuevo", "store");
+        Route::get("/pedidos/cancelar/{id}", "cancel");
     });
 });
 

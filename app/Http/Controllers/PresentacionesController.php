@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Presentacion;
 use App\Http\Requests\PresentacionRequest;
 use App\Http\Resources\PresentacionResource;
+use App\Models\Encargado;
 use App\Models\Formato;
 use App\Models\Marca;
 use App\Models\Producto;
@@ -123,10 +124,14 @@ class PresentacionesController extends Controller
      */
     public function destroy($id)
     {
-        $presentacion = Presentacion::findOrFail($id);
-        $presentacion->delete();
-        
-        return redirect()->route('presentaciones-index')->with('success', 'Se elimino con éxito la presentación.');
+        $encargado = Encargado::where('presentacion_id',$id)->first();
+        if(isset($encargado)){
+            return redirect()->back()->with('error', 'Existen pedidos con esta presentación encargada.');
+        } else {
+            $presentacion = Presentacion::findOrFail($id);
+            $presentacion->delete();
+            return redirect()->route('presentaciones-index')->with('success', 'Se elimino con éxito la presentación.');
+        }
     }
 
     /**

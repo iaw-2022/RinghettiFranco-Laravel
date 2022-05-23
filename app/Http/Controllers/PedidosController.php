@@ -44,28 +44,26 @@ class PedidosController extends Controller
      */
     public function store(Request $request)
     {
-        $pedidorealizado = json_decode($request, false);
-
         $cliente = Auth::user();
 
         $nuevopedido = new Pedido();
 
         $nuevopedido->cliente_id = $cliente->id;
-        $nuevopedido->fecha_realizado = $pedidorealizado->pedido->fecha_realizado;
+        $nuevopedido->fecha_realizado = $request->fecha_realizado;
 
         $nuevopedido->save();
 
-        foreach($pedidorealizado['encargados']->encargados as $encargado){
+        foreach($request->encargados as $encargado){
             $nuevoitem = new Encargado();
 
             $nuevoitem->pedido_id = $nuevopedido->id;
-            $nuevoitem->presentacion_id = $encargado->presentacion_id;
-            $nuevoitem->cantidad = $encargado->cantidad;
+            $nuevoitem->presentacion_id = $encargado['presentacion_id'];
+            $nuevoitem->cantidad = $encargado['cantidad'];
 
             $nuevoitem->save();
         }
 
-        return response()->jSon([$request], 200);
+        return response()->jSon(["Se realizó con exito el pedido."], 200);
     }
 
     /**

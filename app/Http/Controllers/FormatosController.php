@@ -118,7 +118,7 @@ class FormatosController extends Controller
      */
     public function list()
     {
-        return response()->jSon([Formato::all()],200);
+        return response()->jSon(['formatos' => Formato::all()],200);
     }
 
     /**
@@ -131,9 +131,9 @@ class FormatosController extends Controller
     {
         $presentaciones = Presentacion::where('formato_id',$id)->get();
         if(isset($presentaciones)){
-            return response()->jSon([PresentacionResource::collection($presentaciones)],200);
+            return response()->jSon(['presentaciones' => PresentacionResource::collection($presentaciones)],200);
         }else{
-            return response()->jSon(["No tenemos productos en el formato indicado todavía."],500);
+            return response()->jSon(['respuesta' => "No tenemos productos en el formato indicado todavía."],500);
         }
     }
 }

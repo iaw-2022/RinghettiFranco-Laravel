@@ -7,8 +7,8 @@ use App\Models\Pedido;
 use App\Models\Cliente;
 use App\Models\Encargado;
 use App\Models\Presentacion;
-use App\Http\Requests\PedidoRequest;
 use App\Http\Resources\EncargadoResource;
+use App\Http\Resources\PresentacionResource;
 use Exception;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -49,12 +49,29 @@ class PedidosController extends Controller
         $nuevopedido = new Pedido();
 
         $nuevopedido->cliente_id = $cliente->id;
-        $nuevopedido->fecha_realizado = $request->fecha_realizado;
+        $nuevopedido->fecha_realizado = Carbon::now()->format('Y-m-d');
 
         $nuevopedido->save();
 
-        foreach($request->encargados as $encargado){
+        foreach ($request->encargados as $encargado) {
             $nuevoitem = new Encargado();
+
+            $presentacion = Presentacion::findOrFail($encargado['presentacion_id']);
+            $presentacion->stock -= $encargado['cantidad'];
+
+            if ($presentacion->stock < 0) {
+                $cancelados = Encargado::where('pedido_id',$nuevopedido->id)->get();
+                foreach($cancelados as $cancelado){
+                    $presentacion = Presentacion::findOrFail($cancelado->presentacion_id);
+                    $presentacion->stock += $cancelado->cantidad;
+                    $presentacion->save();
+                    $cancelado->delete();
+                }
+                $nuevopedido->delete();
+                return response()->jSon(["Se solicitaron más unidades de las disponibles en stock de algúno de los productos encargados.", new PresentacionResource($presentacion)], 401);
+            }
+
+            $presentacion->save();
 
             $nuevoitem->pedido_id = $nuevopedido->id;
             $nuevoitem->presentacion_id = $encargado['presentacion_id'];
@@ -63,7 +80,7 @@ class PedidosController extends Controller
             $nuevoitem->save();
         }
 
-        return response()->jSon(["Se realizó con exito el pedido."], 200);
+        return response()->jSon(['respuesta' => "Se realizó con exito el pedido.", 'pedido' => $nuevopedido], 200);
     }
 
     /**
@@ -136,7 +153,7 @@ class PedidosController extends Controller
     public function list()
     {
         $cliente = Auth::user();
-        return response()->jSon([Pedido::where('cliente_id', $cliente->id)->get()], 200);
+        return response()->jSon(['pedidos' => Pedido::where('cliente_id', $cliente->id)->get()], 200);
     }
 
     /**
@@ -152,11 +169,12 @@ class PedidosController extends Controller
         if (isset($pedido)) {
             return response()->jSon(['pedido' => $pedido, 'encargados' => EncargadoResource::collection($encargados)], 200);
         } else {
-            return response()->jSon(["No existe el pedido indicado."], 500);
+            return response()->jSon(['respuesta' => "No existe el pedido indicado."], 500);
         }
     }
 
-    public function cancel($id){
+    public function cancel($id)
+    {
         $pedido = Pedido::findOrFail($id);
 
         if (isset($pedido)) {
@@ -165,16 +183,21 @@ class PedidosController extends Controller
             $fechamargen = $fecharealizado->addDay();
             $hoy = Carbon::now();
 
-            if($hoy->lte($fechamargen)){
-                $pedido->delete();
-                
-                return response()->jSon(["Se canceló con éxito el pedido."], 200);
-            } else {
-                return response()->jSon(["Paso el período de gracia para la cancelación del pedido."], 406);
-            }
+            if ($hoy->lte($fechamargen)) {
+                $encargados = Encargado::where('pedido_id', $id)->get();
+                foreach ($encargados as $encargado) {
+                    $presentacion = Presentacion::findOrFail($encargado->presentacion_id);
+                    $presentacion->stock += $encargado->cantidad;
+                    $presentacion->save();
+                }
 
+                $pedido->delete();
+                return response()->jSon(['respuesta' => "Se canceló con éxito el pedido."], 200);
+            } else {
+                return response()->jSon(['respuesta' => "Paso el período de gracia para la cancelación del pedido."], 406);
+            }
         } else {
-            return response()->jSon(["No existe el pedido indicado."], 500);
+            return response()->jSon(['respuesta' => "No existe el pedido indicado."], 500);
         }
     }
 }

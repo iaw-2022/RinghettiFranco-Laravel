@@ -114,7 +114,7 @@ class ProductosController extends Controller
      */
     public function list()
     {
-        return response()->jSon([Producto::all()],200);
+        return response()->jSon(['productos' => Producto::all()],200);
     }
 
     /**
@@ -127,9 +127,9 @@ class ProductosController extends Controller
     {
         $presentaciones = Presentacion::where('producto_id',$id)->get();
         if(isset($presentaciones)){
-            return response()->jSon([PresentacionResource::collection($presentaciones)],200);
+            return response()->jSon(['presentaciones' => PresentacionResource::collection($presentaciones)],200);
         }else{
-            return response()->jSon(["No tenemos productos del tipo indicado todavía."],500);
+            return response()->jSon(['respuesta' => "No tenemos productos del tipo indicado todavía."],500);
         }
     }
 }

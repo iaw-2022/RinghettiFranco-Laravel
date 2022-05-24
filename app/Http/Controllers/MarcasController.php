@@ -115,7 +115,7 @@ class MarcasController extends Controller
      */
     public function list()
     {
-        return response()->jSon([Marca::all()],200);
+        return response()->jSon(['marcas' => Marca::all()],200);
     }
 
     /**
@@ -128,9 +128,9 @@ class MarcasController extends Controller
     {
         $presentaciones = Presentacion::where('marca_id',$id)->get();
         if(isset($presentaciones)){
-            return response()->jSon([PresentacionResource::collection($presentaciones)],200);
+            return response()->jSon(['presentaciones' => PresentacionResource::collection($presentaciones)],200);
         }else{
-            return response()->jSon(["No tenemos productos de la marca indicada todavía."],500);
+            return response()->jSon(['respuesta' => "No tenemos productos de la marca indicada todavía."],500);
         }
     }
 }

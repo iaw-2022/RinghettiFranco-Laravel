@@ -141,7 +141,7 @@ class PresentacionesController extends Controller
      */
     public function list()
     {
-        return response()->jSon([PresentacionResource::collection(Presentacion::all())],200);
+        return response()->jSon(['presentaciones' => PresentacionResource::collection(Presentacion::all())],200);
     }
 
     /**
@@ -154,9 +154,9 @@ class PresentacionesController extends Controller
     {
         $presentacion = Presentacion::findOrFail($id);
         if(isset($presentacion)){
-            return response()->jSon([new PresentacionResource($presentacion)],200);
+            return response()->jSon(['presentacion' => new PresentacionResource($presentacion)],200);
         }else{
-            return response()->jSon(["No se encontró la presentación indicada."],404);
+            return response()->jSon(['respuesta' => "No se encontró la presentación indicada."],404);
         }
     }
 }

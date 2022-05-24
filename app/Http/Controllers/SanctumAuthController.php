@@ -51,12 +51,12 @@ class SanctumAuthController extends Controller
         if (isset($cliente)) {
             if (Hash::check($request->password, $cliente->password)) {
                 $token = $cliente->createToken("auth_token")->plainTextToken;
-                return response()->json(["Se inicio sesión correctamente.", "access_token" => $token], 202);
+                return response()->json(['respuesta' => "Se inicio sesión correctamente.", "access_token" => $token], 202);
             } else {
-                return response()->json(["La contraseña provista es incorrecta.", "error" => true], 401);
+                return response()->json(['respuesta' => "La contraseña provista es incorrecta.", "error" => true], 401);
             }
         } else {
-            return response()->json(["No existe el usuario provisto.", "error" => true], 404);
+            return response()->json(['respuesta' => "No existe el usuario provisto.", "error" => true], 404);
         }
     }
 
@@ -104,22 +104,22 @@ class SanctumAuthController extends Controller
             $cliente->tokens()->delete();
             $token = $cliente->createToken("auth_token")->plainTextToken;
 
-            return response()->json(["Se cambio de forma correcta la contraseña.", "access_token" => $token], 202);
+            return response()->json(['respuesta' => "Se cambio de forma correcta la contraseña.", "access_token" => $token], 202);
         } else {
-            return response()->json(["La contraseña provista es incorrecta.", "error" => true], 401);
+            return response()->json(['respuesta' => "La contraseña provista es incorrecta.", "error" => true], 401);
         }
     }
 
     public function logout()
     {
         Auth::user()->tokens()->delete();
-        return response()->json(["status" => 1, "Se ha cerrado sesión correctamente."], 202);
+        return response()->json(['respuesta' => "Se ha cerrado sesión correctamente."], 202);
     }
 
     public function signout()
     {
         Auth::user()->tokens()->delete();
         Auth::user()->delete();
-        return response()->json(["status" => 1, "Se ha cerrado su cuenta correctamente."], 202);
+        return response()->json(['respuesta' => "Se ha cerrado su cuenta correctamente."], 202);
     }
 }

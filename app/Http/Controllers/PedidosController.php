@@ -8,6 +8,7 @@ use App\Models\Cliente;
 use App\Models\Encargado;
 use App\Models\Presentacion;
 use App\Http\Resources\EncargadoResource;
+use App\Http\Resources\PedidoResource;
 use App\Http\Resources\PresentacionResource;
 use Exception;
 use Illuminate\Support\Carbon;
@@ -153,7 +154,7 @@ class PedidosController extends Controller
     public function list()
     {
         $cliente = Auth::user();
-        return response()->jSon(['pedidos' => Pedido::where('cliente_id', $cliente->id)->get()], 200);
+        return response()->jSon(['pedidos' => PedidoResource::collection(Pedido::where('cliente_id', $cliente->id)->get())], 200);
     }
 
     /**
@@ -167,7 +168,7 @@ class PedidosController extends Controller
         $pedido = Pedido::findOrFail($id);
         $encargados = Encargado::where('pedido_id', $pedido->id)->get();
         if (isset($pedido)) {
-            return response()->jSon(['pedido' => $pedido, 'encargados' => EncargadoResource::collection($encargados)], 200);
+            return response()->jSon(['pedido' => new PedidoResource($pedido), 'encargados' => EncargadoResource::collection($encargados)], 200);
         } else {
             return response()->jSon(['respuesta' => "No existe el pedido indicado."], 500);
         }

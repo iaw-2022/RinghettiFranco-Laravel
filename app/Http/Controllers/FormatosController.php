@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Formato;
 use App\Http\Requests\FormatoRequest;
+use App\Http\Resources\FormatoResource;
 use App\Http\Resources\PresentacionResource;
 use App\Models\Presentacion;
 use Exception;
@@ -118,7 +119,7 @@ class FormatosController extends Controller
      */
     public function list()
     {
-        return response()->jSon(['formatos' => Formato::all()],200);
+        return response()->jSon(['formatos' => FormatoResource::collection(Formato::all())],200);
     }
 
     /**

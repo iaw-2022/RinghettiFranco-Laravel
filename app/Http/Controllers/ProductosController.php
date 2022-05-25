@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Http\Requests\ProductoRequest;
+use App\Http\Resources\ListadoResource;
 use App\Http\Resources\PresentacionResource;
 use App\Models\Presentacion;
 use Exception;
@@ -114,7 +115,7 @@ class ProductosController extends Controller
      */
     public function list()
     {
-        return response()->jSon(['productos' => Producto::all()],200);
+        return response()->jSon(['productos' => ListadoResource::collection(Producto::all())],200);
     }
 
     /**

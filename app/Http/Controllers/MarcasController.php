@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Marca;
 use App\Models\Presentacion;
 use App\Http\Requests\MarcaRequest;
+use App\Http\Resources\ListadoResource;
 use App\Http\Resources\PresentacionResource;
 use Exception;
 
@@ -115,7 +116,7 @@ class MarcasController extends Controller
      */
     public function list()
     {
-        return response()->jSon(['marcas' => Marca::all()],200);
+        return response()->jSon(['marcas' => ListadoResource::collection(Marca::all())],200);
     }
 
     /**

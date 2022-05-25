@@ -19,16 +19,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post("/signin", [SanctumAuthController::class, "signin"]);
-Route::post("/login", [SanctumAuthController::class, "login"]);
+Route::post("/user/signin", [SanctumAuthController::class, "signin"]);
+Route::post("/user/login", [SanctumAuthController::class, "login"]);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::controller(SanctumAuthController::class)->group(function () {
-        Route::post("/profile", "profile");
-        Route::put("/modify", "modify");
-        Route::put("/passwordchange", "passwordchange");
-        Route::post("/logout", "logout");
-        Route::delete("/signout", "signout");
+        Route::post("/user/profile", "profile");
+        Route::put("/user/modify", "modify");
+        Route::put("/user/passwordchange", "passwordchange");
+        Route::post("/user/logout", "logout");
+        Route::delete("/user/signout", "signout");
     });
 
     Route::controller(PedidosController::class)->group(function () {

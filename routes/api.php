@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post("/user/profile", "profile");
         Route::put("/user/modify", "modify");
         Route::put("/user/passwordchange", "passwordchange");
-        Route::post("/user/logout", "logout");
+        Route::get("/user/logout", "logout");
         Route::delete("/user/signout", "signout");
     });
 

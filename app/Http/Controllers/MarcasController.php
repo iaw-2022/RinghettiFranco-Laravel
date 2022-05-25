@@ -128,10 +128,6 @@ class MarcasController extends Controller
     public function detail($id)
     {
         $presentaciones = Presentacion::where('marca_id',$id)->get();
-        if(isset($presentaciones)){
-            return response()->jSon(['presentaciones' => PresentacionResource::collection($presentaciones)],200);
-        }else{
-            return response()->jSon(['respuesta' => "No tenemos productos de la marca indicada todavía."],500);
-        }
+        return response()->jSon(['presentaciones' => PresentacionResource::collection($presentaciones)],200);
     }
 }

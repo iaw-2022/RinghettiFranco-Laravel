@@ -131,10 +131,6 @@ class FormatosController extends Controller
     public function detail($id)
     {
         $presentaciones = Presentacion::where('formato_id',$id)->get();
-        if(isset($presentaciones)){
-            return response()->jSon(['presentaciones' => PresentacionResource::collection($presentaciones)],200);
-        }else{
-            return response()->jSon(['respuesta' => "No tenemos productos en el formato indicado todavía."],500);
-        }
+        return response()->jSon(['presentaciones' => PresentacionResource::collection($presentaciones)],200);
     }
 }

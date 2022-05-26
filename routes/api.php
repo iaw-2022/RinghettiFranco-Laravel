@@ -39,7 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
-Route::get('/user/signout', function () {
+Route::delete('/user/signout', function () {
     return response()->json(405);
 });
 

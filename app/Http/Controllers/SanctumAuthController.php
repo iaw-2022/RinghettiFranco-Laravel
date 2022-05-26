@@ -62,7 +62,7 @@ class SanctumAuthController extends Controller
 
     public function profile()
     {
-        return Auth::user();
+        return response()->json([Auth::user()], 200);
     }
 
     public function modify(Request $request)
@@ -120,6 +120,6 @@ class SanctumAuthController extends Controller
     {
         Auth::user()->tokens()->delete();
         Auth::user()->delete();
-        return response()->json(['respuesta' => "Se ha cerrado su cuenta correctamente."], 202);
+        return response()->json(['respuesta' => "Se ha cerrado la cuenta correctamente."], 202);
     }
 }

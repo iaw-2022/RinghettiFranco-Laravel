@@ -39,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
+/** 
 Route::get('/user/profile', function () {
     return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
 });
@@ -54,6 +55,7 @@ Route::get('/user/logout', function () {
 Route::delete('/user/signout', function () {
     return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
 });
+*/
 
 Route::get('/pedidos', function () {
     return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);

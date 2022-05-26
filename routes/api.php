@@ -39,6 +39,10 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
+Route::get('/user/signout', function () {
+    return response()->json(405);
+});
+
 Route::controller(MarcasController::class)->group(function () {
     Route::get("/marcas", "list");
     Route::get("/marcas/{id}", "detail");

@@ -55,7 +55,6 @@ Route::get('/user/logout', function () {
 Route::delete('/user/signout', function () {
     return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
 });
-*/
 
 Route::get('/pedidos', function () {
     return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
@@ -69,6 +68,7 @@ Route::post('/pedidos/nuevo', function () {
 Route::delete('/pedidos/cancelar/{id}', function () {
     return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
 });
+*/
 
 Route::controller(MarcasController::class)->group(function () {
     Route::get("/marcas", "list");

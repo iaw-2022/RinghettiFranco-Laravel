@@ -73,14 +73,22 @@ class SanctumAuthController extends Controller
             'documento_tipo' => 'required',
             'documento_numero' => 'required|numeric',
             'email' => 'required|unique:users',
-            'IVA' => 'required',
             'password' => 'prohibited'
         ]);
 
         try {
             $cliente = Auth::user();
 
-            $cliente->update($request->all());
+            $cliente->nombre = $request->nombre;
+            $cliente->apellido = $request->apellido;
+            $cliente->documento_tipo = $request->documento_tipo;
+            $cliente->documento_numero = $request->documento_numero;
+            $cliente->email = $request->email;
+            $cliente->telefono = $request->telefono;
+            $cliente->direccion = $request->direccion;
+            $cliente->CUIT = $request->CUIT;
+
+            $cliente->save();
 
             return response()->json([$cliente], 202);
         } catch (Exception $ex) {

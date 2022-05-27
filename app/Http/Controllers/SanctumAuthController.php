@@ -53,10 +53,10 @@ class SanctumAuthController extends Controller
                 $token = $cliente->createToken("auth_token")->plainTextToken;
                 return response()->json(["access_token" => $token], 202);
             } else {
-                return response()->json(['message' => "La contraseña provista es incorrecta.", "error" => true], 401);
+                return response()->json(['message' => "La contraseña provista es incorrecta."], 401);
             }
         } else {
-            return response()->json(['message' => "No existe el usuario provisto.", "error" => true], 404);
+            return response()->json(['message' => "No existe el usuario provisto."], 404);
         }
     }
 
@@ -92,7 +92,7 @@ class SanctumAuthController extends Controller
 
             return response()->json([$cliente], 202);
         } catch (Exception $ex) {
-            return response()->json(["error" => true], 500);
+            return response()->json(['message' => "Algo salió mal."], 500);
         }
     }
 
@@ -114,7 +114,7 @@ class SanctumAuthController extends Controller
 
             return response()->json(['message' => "Se cambio de forma correcta la contraseña.", "access_token" => $token], 202);
         } else {
-            return response()->json(['message' => "La contraseña provista es incorrecta.", "error" => true], 401);
+            return response()->json(['message' => "La contraseña provista es incorrecta."], 401);
         }
     }
 

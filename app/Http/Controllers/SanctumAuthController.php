@@ -51,7 +51,7 @@ class SanctumAuthController extends Controller
         if (isset($cliente)) {
             if (Hash::check($request->password, $cliente->password)) {
                 $token = $cliente->createToken("auth_token")->plainTextToken;
-                return response()->json(["access_token" => $token], 202);
+                return response()->json(['message' => "Ha iniciado sesión correctamente.", "access_token" => $token], 202);
             } else {
                 return response()->json(['message' => "La contraseña provista es incorrecta."], 401);
             }

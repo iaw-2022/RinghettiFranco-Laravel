@@ -72,7 +72,7 @@ class SanctumAuthController extends Controller
             'apellido' => 'required',
             'documento_tipo' => 'required',
             'documento_numero' => 'required|numeric',
-            'email' => 'required|unique:users',
+            'email' => 'prohibited',
             'password' => 'prohibited'
         ]);
 
@@ -83,7 +83,6 @@ class SanctumAuthController extends Controller
             $cliente->apellido = $request->apellido;
             $cliente->documento_tipo = $request->documento_tipo;
             $cliente->documento_numero = $request->documento_numero;
-            $cliente->email = $request->email;
             $cliente->telefono = $request->telefono;
             $cliente->direccion = $request->direccion;
             $cliente->CUIT = $request->CUIT;

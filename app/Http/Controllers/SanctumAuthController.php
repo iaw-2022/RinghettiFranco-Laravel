@@ -105,7 +105,7 @@ class SanctumAuthController extends Controller
         $cliente = Auth::user();
 
         if (Hash::check($request->old_password, $cliente->password)) {
-            $cliente->password = $request->new_password;
+            $cliente->password = Hash::make($request->new_password);
             $cliente->save();
 
             $cliente->tokens()->delete();

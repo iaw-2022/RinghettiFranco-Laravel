@@ -170,7 +170,7 @@ class PedidosController extends Controller
         if (isset($pedido)) {
             return response()->jSon(['pedido' => new PedidoResource($pedido), 'encargados' => EncargadoResource::collection($encargados)], 200);
         } else {
-            return response()->jSon(['respuesta' => "No existe el pedido indicado."], 500);
+            return response()->jSon(['message' => "No existe el pedido indicado."], 500);
         }
     }
 
@@ -193,12 +193,12 @@ class PedidosController extends Controller
                 }
 
                 $pedido->delete();
-                return response()->jSon(['respuesta' => "Se canceló con éxito el pedido."], 200);
+                return response()->jSon(['message' => "Se canceló con éxito el pedido."], 200);
             } else {
-                return response()->jSon(['respuesta' => "Paso el período de gracia para la cancelación del pedido."], 406);
+                return response()->jSon(['message' => "Paso el período de gracia para la cancelación del pedido."], 406);
             }
         } else {
-            return response()->jSon(['respuesta' => "No existe el pedido indicado."], 500);
+            return response()->jSon(['message' => "No existe el pedido indicado."], 500);
         }
     }
 }

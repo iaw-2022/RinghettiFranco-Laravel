@@ -53,10 +53,10 @@ class SanctumAuthController extends Controller
                 $token = $cliente->createToken("auth_token")->plainTextToken;
                 return response()->json(["access_token" => $token], 202);
             } else {
-                return response()->json(['respuesta' => "La contraseña provista es incorrecta.", "error" => true], 401);
+                return response()->json(['message' => "La contraseña provista es incorrecta.", "error" => true], 401);
             }
         } else {
-            return response()->json(['respuesta' => "No existe el usuario provisto.", "error" => true], 404);
+            return response()->json(['message' => "No existe el usuario provisto.", "error" => true], 404);
         }
     }
 
@@ -112,22 +112,22 @@ class SanctumAuthController extends Controller
             $cliente->tokens()->delete();
             $token = $cliente->createToken("auth_token")->plainTextToken;
 
-            return response()->json(['respuesta' => "Se cambio de forma correcta la contraseña.", "access_token" => $token], 202);
+            return response()->json(['message' => "Se cambio de forma correcta la contraseña.", "access_token" => $token], 202);
         } else {
-            return response()->json(['respuesta' => "La contraseña provista es incorrecta.", "error" => true], 401);
+            return response()->json(['message' => "La contraseña provista es incorrecta.", "error" => true], 401);
         }
     }
 
     public function logout()
     {
         Auth::user()->tokens()->delete();
-        return response()->json(['respuesta' => "Se ha cerrado sesión correctamente."], 202);
+        return response()->json(['message' => "Se ha cerrado sesión correctamente."], 202);
     }
 
     public function signout()
     {
         Auth::user()->tokens()->delete();
         Auth::user()->delete();
-        return response()->json(['respuesta' => "Se ha cerrado la cuenta correctamente."], 202);
+        return response()->json(['message' => "Se ha cerrado la cuenta correctamente."], 202);
     }
 }

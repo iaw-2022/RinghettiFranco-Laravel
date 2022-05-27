@@ -152,11 +152,11 @@ class PresentacionesController extends Controller
      */
     public function detail($id)
     {
-        $presentacion = Presentacion::findOrFail($id);
+        $presentacion = Presentacion::find($id);
         if(isset($presentacion)){
             return response()->jSon(['presentacion' => new PresentacionResource($presentacion)],200);
         }else{
-            return response()->jSon(['respuesta' => "No se encontró la presentación indicada."],404);
+            return response()->jSon(['message' => "No se encontró la presentación indicada."],404);
         }
     }
 }

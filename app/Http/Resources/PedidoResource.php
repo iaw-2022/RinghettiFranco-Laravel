@@ -18,6 +18,13 @@ class PedidoResource extends JsonResource
     {
         $encargados = Encargado::where('pedido_id', $this->id)->get();
 
+        $total = 0;
+
+        foreach($encargados as $encargado){
+            $presentacion = Presentacion::find($encargado->presentacion_id);
+            $total = $total + $presentacion->precio;
+        }
+
         return [
             'id' => $this->id,
             'fecha_realizado' => $this->fecha_realizado,

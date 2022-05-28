@@ -25,11 +25,11 @@ class PedidoResource extends JsonResource
             $presentacion = Presentacion::findOrFail($encargado->presentacion_id);
             $total += $presentacion->precio;
         }
-        
+
         return [
             'id' => $this->id,
             'cliente_id' => $this->cliente_id,
-            //'cliente_nombre' => $cliente->apellido.' '.$cliente->nombre,
+            'cliente_nombre' => $cliente->apellido.' '.$cliente->nombre,
             'fecha_realizado' => $this->fecha_realizado,
             'fecha_entregado' => $this->fecha_entregado,
             'total' => $total

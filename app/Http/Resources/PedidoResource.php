@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Encargado;
 use App\Models\Presentacion;
+use App\Resources\EncargadoResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PedidoResource extends JsonResource
@@ -29,8 +30,7 @@ class PedidoResource extends JsonResource
             'id' => $this->id,
             'fecha_realizado' => $this->fecha_realizado,
             'fecha_entregado' => $this->fecha_entregado,
-            'total' => $total,
-            'encargados' => $encargados,
+            'total' => $total
         ]; 
     }
 }

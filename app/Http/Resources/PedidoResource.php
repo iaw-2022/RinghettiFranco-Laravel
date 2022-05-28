@@ -29,6 +29,7 @@ class PedidoResource extends JsonResource
             'id' => $this->id,
             'fecha_realizado' => $this->fecha_realizado,
             'fecha_entregado' => $this->fecha_entregado,
+            'total' => $total,
             'encargados' => $encargados,
         ]; 
     }

@@ -39,37 +39,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
-/** 
-Route::get('/user/profile', function () {
-    return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
-});
-Route::put('/user/modify', function () {
-    return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
-});
-Route::put('/user/passwordchange', function () {
-    return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
-});
-Route::get('/user/logout', function () {
-    return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
-});
-Route::delete('/user/signout', function () {
-    return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
-});
-
-Route::get('/pedidos', function () {
-    return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
-});
-Route::get('/pedidos/{id}]', function () {
-    return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
-});
-Route::post('/pedidos/nuevo', function () {
-    return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
-});
-Route::delete('/pedidos/cancelar/{id}', function () {
-    return response()->json(['Necesita iniciar sesión para ejecutar este requerimiento.'], 405);
-});
-*/
-
 Route::controller(MarcasController::class)->group(function () {
     Route::get("/marcas", "list");
     Route::get("/marcas/{id}", "detail");

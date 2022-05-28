@@ -48,7 +48,7 @@ class PedidosController extends Controller
         $cliente = Auth::user();
 
         if(count($request->encargados) == 0){
-            return response()->jSon(['message' => "Debe haber productos encargados en el pedido."], 401);
+            return response()->jSon(['message' => "Debe haber productos encargados en el pedido."], 406);
         }
 
         $nuevopedido = new Pedido();
@@ -73,7 +73,7 @@ class PedidosController extends Controller
                     $cancelado->delete();
                 }
                 $nuevopedido->delete();
-                return response()->jSon(['message' => "Se solicitaron más unidades de las disponibles en stock de algúno de los productos encargados.", new PresentacionResource($presentacion)], 401);
+                return response()->jSon(['message' => "Se solicitaron más unidades de las disponibles en stock de algúno de los productos encargados."], 406);
             }
 
             $presentacion->stock = $stockfinal;
@@ -86,7 +86,7 @@ class PedidosController extends Controller
             $nuevoitem->save();
         }
 
-        return response()->jSon(['message' => "Se realizó con exito el pedido.", 'pedido' => $nuevopedido], 200);
+        return response()->jSon(['message' => "Se realizó con exito el pedido."], 200);
     }
 
     /**

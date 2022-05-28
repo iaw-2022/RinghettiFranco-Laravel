@@ -26,7 +26,7 @@ class EncargadoResource extends JsonResource
             'id' => $this->id,
             'presentacion_id' => $this->presentacion_id,
             'cantidad' => $this->cantidad,
-            'presentacion_precio' => $presentacion->precio,
+            'precio' => $presentacion->precio,
             'formato_id' => $presentacion->formato_id,
             'formato_descripcion' => $formato->descripcion,
             'formato_medidas' => $formato->cantidad." ".$formato->unidades,

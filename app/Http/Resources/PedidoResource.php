@@ -16,10 +16,13 @@ class PedidoResource extends JsonResource
      */
     public function toArray($request)
     {
+        $encargados = Encargado::where('pedido_id', $this->id)->get();
+
         return [
             'id' => $this->id,
             'fecha_realizado' => $this->fecha_realizado,
-            'fecha_entregado' => $this->fecha_entregado
+            'fecha_entregado' => $this->fecha_entregado,
+            'encargados' => $encargados,
         ]; 
     }
 }

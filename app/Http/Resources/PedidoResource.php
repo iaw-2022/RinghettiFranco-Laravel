@@ -19,20 +19,21 @@ class PedidoResource extends JsonResource
     {
         $cliente = Cliente::findOrFali($this->cliente_id);
 
+        /**
         $encargados = Encargado::where('pedido_id', $this->id)->get();
         $total = 0;
         foreach($encargados as $encargado){
             $presentacion = Presentacion::findOrFail($encargado->presentacion_id);
             $total += $presentacion->precio;
         }
-
+        */
         return [
             'id' => $this->id,
             'cliente_id' => $this->cliente_id,
             'cliente_nombre' => $cliente->apellido.' '.$cliente->nombre,
             'fecha_realizado' => $this->fecha_realizado,
             'fecha_entregado' => $this->fecha_entregado,
-            'total' => $total
+            //'total' => $total
         ]; 
     }
 }

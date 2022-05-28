@@ -154,7 +154,6 @@ class PedidosController extends Controller
     public function list()
     {
         $cliente = Auth::user();
-        return response()->json([$cliente], 200);
         return response()->jSon(['pedidos' => PedidoResource::collection(Pedido::where('cliente_id', $cliente->id)->get())], 200);
     }
 

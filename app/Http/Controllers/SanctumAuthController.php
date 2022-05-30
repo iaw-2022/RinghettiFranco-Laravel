@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ClienteResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class SanctumAuthController extends Controller
 
         $cliente->save();
 
-        return response()->json([$cliente], 201);
+        return response()->json([new ClienteResource($cliente)], 201);
     }
 
     public function login(Request $request)
@@ -89,7 +90,7 @@ class SanctumAuthController extends Controller
 
             $cliente->save();
 
-            return response()->json([$cliente], 200);
+            return response()->json([new ClienteResource($cliente)], 200);
         } catch (Exception $ex) {
             return response()->json(['message' => "Algo salió mal."], 500);
         }

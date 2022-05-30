@@ -63,7 +63,7 @@ class SanctumAuthController extends Controller
 
     public function profile()
     {
-        return response()->json([Auth::user()], 200);
+        return response()->json([new ClienteResource(Auth::user())], 200);
     }
 
     public function modify(Request $request)

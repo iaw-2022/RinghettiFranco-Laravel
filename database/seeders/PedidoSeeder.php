@@ -19,5 +19,17 @@ class PedidoSeeder extends Seeder
             'cliente_id' => '1',
             'fecha_realizado' => '2022-01-24',
         ]);
+        DB::table('pedidos')->insert([
+            'cliente_id' => '2',
+            'fecha_realizado' => '2022-05-30',
+        ]);
+        DB::table('pedidos')->insert([
+            'cliente_id' => '2',
+            'fecha_realizado' => '2022-05-25',
+        ]);
+        DB::table('pedidos')->insert([
+            'cliente_id' => '2',
+            'fecha_realizado' => '2022-05-23',
+        ]);
     }
 }

@@ -25,5 +25,26 @@ class EncargadoSeeder extends Seeder
             'presentacion_id' => '2',
             'cantidad' => '3'
         ]);
+
+        DB::table('encargados')->insert([
+            'pedido_id' => '2',
+            'presentacion_id' => '1',
+            'cantidad' => '4'
+        ]);
+        DB::table('encargados')->insert([
+            'pedido_id' => '3',
+            'presentacion_id' => '1',
+            'cantidad' => '3'
+        ]);
+        DB::table('encargados')->insert([
+            'pedido_id' => '3',
+            'presentacion_id' => '3',
+            'cantidad' => '5'
+        ]);
+        DB::table('encargados')->insert([
+            'pedido_id' => '4',
+            'presentacion_id' => '1',
+            'cantidad' => '5'
+        ]);
     }
 }

@@ -171,18 +171,25 @@ class PedidosController extends Controller
      */
     public function detail($id)
     {
+        $cliente = Auth::user();
         $pedido = Pedido::findOrFail($id);
-        $encargados = Encargado::where('pedido_id', $pedido->id)->get();
-        if (isset($pedido)) {
-            return response()->jSon(['pedido' => new PedidoResource($pedido), 'encargados' => EncargadoResource::collection($encargados)], 200);
-        } else {
-            return response()->jSon(['message' => "No existe el pedido indicado."], 500);
+
+        if($pedido->cliente_id <> $cliente->id) {
+            return response()->jSon(['message' => "El id del pedido no corresponde con un pedido realizado por el cliente."], 403);   
         }
+
+        $encargados = Encargado::where('pedido_id', $pedido->id)->get();
+        return response()->jSon(['pedido' => new PedidoResource($pedido), 'encargados' => EncargadoResource::collection($encargados)], 200);
     }
 
     public function cancel($id)
     {
+        $cliente = Auth::user();
         $pedido = Pedido::findOrFail($id);
+
+        if($pedido->cliente_id <> $cliente->id) {
+            return response()->jSon(['message' => "El id del pedido no corresponde con un pedido realizado por el cliente."], 403);   
+        }
 
         $fecharealizado = Carbon::createFromFormat('Y-m-d',  $pedido->fecha_realizado);
         $fechamargen = $fecharealizado->addDay();

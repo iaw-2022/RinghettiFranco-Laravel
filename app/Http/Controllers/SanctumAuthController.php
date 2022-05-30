@@ -89,7 +89,7 @@ class SanctumAuthController extends Controller
 
             $cliente->save();
 
-            return response()->json([$cliente], 202);
+            return response()->json([$cliente], 200);
         } catch (Exception $ex) {
             return response()->json(['message' => "Algo salió mal."], 500);
         }

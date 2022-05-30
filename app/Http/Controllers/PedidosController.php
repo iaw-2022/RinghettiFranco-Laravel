@@ -47,7 +47,7 @@ class PedidosController extends Controller
     {
         $cliente = Auth::user();
 
-        if(count($request->encargados) == 0){
+        if (count($request->encargados) == 0) {
             return response()->jSon(['message' => "Debe haber productos encargados en el pedido."], 406);
         }
 
@@ -65,8 +65,8 @@ class PedidosController extends Controller
 
             $stockfinal = $presentacion->stock - $encargado['cantidad'];
             if ($stockfinal < 0) {
-                $cancelados = Encargado::where('pedido_id',$nuevopedido->id)->get();
-                foreach($cancelados as $cancelado){
+                $cancelados = Encargado::where('pedido_id', $nuevopedido->id)->get();
+                foreach ($cancelados as $cancelado) {
                     $presentacion = Presentacion::findOrFail($cancelado->presentacion_id);
                     $presentacion->stock += $cancelado->cantidad;
                     $presentacion->save();
@@ -184,27 +184,22 @@ class PedidosController extends Controller
     {
         $pedido = Pedido::findOrFail($id);
 
-        if (isset($pedido)) {
+        $fecharealizado = Carbon::createFromFormat('Y-m-d',  $pedido->fecha_realizado);
+        $fechamargen = $fecharealizado->addDay();
+        $hoy = Carbon::now();
 
-            $fecharealizado = Carbon::createFromFormat('Y-m-d',  $pedido->fecha_realizado);
-            $fechamargen = $fecharealizado->addDay();
-            $hoy = Carbon::now();
-
-            if ($hoy->lte($fechamargen)) {
-                $encargados = Encargado::where('pedido_id', $id)->get();
-                foreach ($encargados as $encargado) {
-                    $presentacion = Presentacion::findOrFail($encargado->presentacion_id);
-                    $presentacion->stock += $encargado->cantidad;
-                    $presentacion->save();
-                }
-
-                $pedido->delete();
-                return response()->jSon(['message' => "Se canceló con éxito el pedido."], 200);
-            } else {
-                return response()->jSon(['message' => "Paso el período de gracia para la cancelación del pedido."], 406);
+        if ($hoy->lte($fechamargen)) {
+            $encargados = Encargado::where('pedido_id', $id)->get();
+            foreach ($encargados as $encargado) {
+                $presentacion = Presentacion::findOrFail($encargado->presentacion_id);
+                $presentacion->stock += $encargado->cantidad;
+                $presentacion->save();
             }
+
+            $pedido->delete();
+            return response()->jSon(['message' => "Se canceló con éxito el pedido."], 200);
         } else {
-            return response()->jSon(['message' => "No existe el pedido indicado."], 500);
+            return response()->jSon(['message' => "Paso el período de gracia para la cancelación del pedido."], 406);
         }
     }
 }

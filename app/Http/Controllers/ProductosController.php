@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Producto;
+use App\Http\Requests\ProductoRequest;
+use App\Http\Resources\ListadoResource;
+use App\Http\Resources\PresentacionResource;
+use App\Models\Presentacion;
+use Exception;
 
 class ProductosController extends Controller
 {
@@ -14,7 +18,7 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        $productos = Producto::All()->SortBy('nombre');
+        $productos = Producto::All()->sortBy('nombre');
         return view('productos.index')->with('productos',$productos);
     }
 
@@ -25,7 +29,7 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        //
+        return view('productos.create');
     }
 
     /**
@@ -34,9 +38,15 @@ class ProductosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductoRequest $request)
     {
-        //
+        $producto = new Producto();
+        
+        $producto->nombre = $request->nombre;
+
+        $producto->save();
+
+        return redirect()->route('productos-index')->with('success', 'Se agregó con éxito el nuevo tipo de producto.');
     }
 
     /**
@@ -58,7 +68,8 @@ class ProductosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        return view('productos.update')->with('producto',$producto);
     }
 
     /**
@@ -68,9 +79,19 @@ class ProductosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductoRequest $request, $id)
     {
-        //
+        try{
+            $producto = Producto::findOrFail($id);
+
+            $producto->nombre = $request->nombre;
+
+            $producto->save();
+
+            return redirect()->route('productos-index')->with('success', 'Se modificó con éxito el tipo de producto.'); 
+        }catch(Exception $ex){
+            return redirect()->back()->with('error', 'Algo salió mal.');
+        }
     }
 
     /**
@@ -81,6 +102,31 @@ class ProductosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        $producto->delete();
+        
+        return redirect()->route('productos-index')->with('success', 'Se elimino con éxito al tipo de producto.');
+    }
+
+    /**
+     * Display a listing of the resource for the API's endpoint.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list()
+    {
+        return response()->jSon(['productos' => ListadoResource::collection(Producto::all())],200);
+    }
+
+    /**
+     * Display the specified resource for the API's endpoint.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id)
+    {
+        $presentaciones = Presentacion::where('producto_id',$id)->get();
+        return response()->jSon(['presentaciones' => PresentacionResource::collection($presentaciones)],200);
     }
 }

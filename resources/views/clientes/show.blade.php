@@ -1,6 +1,10 @@
 @extends('layouts.app')
-@section('contenido')
 
+@section('titulo')
+    <title> Cliente </title>
+@endsection
+
+@section('contenido')
 <div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
@@ -28,11 +32,11 @@
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label"><b>Contacto</b></label>              
-                <label class="col-form-label col-sm-10">{{$cliente->telefono}} - {{$cliente->correo}}</label>
+                <label class="col-form-label col-sm-10">{{$cliente->email}} - {{$cliente->telefono}}</label>
             </div>
             
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><b>Situacion IVA</b></label>              
+                <label class="col-sm-2 col-form-label"><b>Situacion IVA</b></label>  
                 <label class="col-form-label col-sm-10">{{$cliente->IVA}} - CUIT/CUIL: {{$cliente->cuit}}</label>
             </div>
 
@@ -49,7 +53,7 @@
                     </thead>
                 
                     <tbody>
-                         @foreach($pedidos as $pedido)
+                        @foreach($pedidos as $pedido)
                         <tr>
                             <td>{{$pedido->fecha_realizado}}</td>
                             <td>{{$pedido->fecha_entregado}}</td>
@@ -61,6 +65,4 @@
         </div>
     </div>
 </div>
-
-
 @endsection

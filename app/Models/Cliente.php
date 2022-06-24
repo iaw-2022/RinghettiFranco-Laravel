@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 
 class Cliente extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory;
 
     public $timestamps=false;
 
@@ -17,12 +18,18 @@ class Cliente extends Model
         'apellido',
         'documento_tipo',
         'documento_numero',
-        'correo',
+        'email',
+        'password',
         'telefono',
         'direccion',
         'IVA',
-        'CUIT'
+        'CUIT',
     ];    
+
+    protected $hidden = [
+        'remember_token',
+        'password'
+    ];
 
     public function Pedidos(){
         return $this->hasMany('App\Models\Pedido');

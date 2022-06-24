@@ -61,11 +61,11 @@
                     <br>
                     <div class="row align-items-center">
                         <div class="col-2">
-                            <label for="inputCorreo"><b>Correo</b></label>
+                            <label for="inputEmail"><b>Correo</b></label>
                         </div>
                         <div class="col-md-6">
-                            <input type="email" name="correo" class="form-control" id="inputCorreo" placeholder="ejemplo@ejemplo.com" value={{old('correo', $cliente->correo)}}>
-                            @error('correo')
+                            <input type="email" name="email" class="form-control" id="inputEmail" placeholder="ejemplo@ejemplo.com" value={{old('email', $cliente->email)}}>
+                            @error('email')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror   
                         </div>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Presentacion;
 use App\Http\Requests\PresentacionRequest;
+use App\Http\Resources\PresentacionResource;
+use App\Models\Encargado;
 use App\Models\Formato;
 use App\Models\Marca;
 use App\Models\Producto;
@@ -123,9 +124,39 @@ class PresentacionesController extends Controller
      */
     public function destroy($id)
     {
-        $presentacion = Presentacion::findOrFail($id);
-        $presentacion->delete();
-        
-        return redirect()->route('presentaciones-index')->with('success', 'Se elimino con éxito la presentación.');
+        $encargado = Encargado::where('presentacion_id',$id)->first();
+        if(isset($encargado)){
+            return redirect()->back()->with('error', 'Existen pedidos con esta presentación encargada.');
+        } else {
+            $presentacion = Presentacion::findOrFail($id);
+            $presentacion->delete();
+            return redirect()->route('presentaciones-index')->with('success', 'Se elimino con éxito la presentación.');
+        }
+    }
+
+    /**
+     * Display a listing of the resource for the API's endpoint.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list()
+    {
+        return response()->jSon(['presentaciones' => PresentacionResource::collection(Presentacion::all())],200);
+    }
+
+    /**
+     * Display the specified resource for the API's endpoint.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id)
+    {
+        $presentacion = Presentacion::find($id);
+        if(isset($presentacion)){
+            return response()->jSon(['presentacion' => new PresentacionResource($presentacion)],200);
+        }else{
+            return response()->jSon(['message' => "No se encontró la presentación indicada."],404);
+        }
     }
 }

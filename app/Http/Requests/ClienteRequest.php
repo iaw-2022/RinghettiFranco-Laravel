@@ -29,8 +29,7 @@ class ClienteRequest extends FormRequest
             'apellido'=> 'required',
             'doctipo' => 'required',
             'docnro' => 'required|numeric',
-            'correo' => new RequiredIf($this->telefono == null),'email',
-            'telefono' => new RequiredIf($this->correo == null),
+            'email' => 'required|email',
             'IVA' => 'required',
             'CUIT' => new RequiredIf($this->IVA != 'Consumidor final'),'numeric'
         ];

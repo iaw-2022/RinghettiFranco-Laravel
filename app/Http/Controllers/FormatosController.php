@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Models\Formato;
 use App\Http\Requests\FormatoRequest;
+use App\Http\Resources\FormatoResource;
+use App\Http\Resources\PresentacionResource;
+use App\Models\Presentacion;
 use Exception;
 
 class FormatosController extends Controller
@@ -80,7 +81,7 @@ class FormatosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FormatoRequest $request, $id)
     {
         try{
             $formato = Formato::findOrFail($id);
@@ -109,6 +110,27 @@ class FormatosController extends Controller
         $formato->delete();
         
         return redirect()->route('formatos-index')->with('success', 'Se elimino con éxito el formato.');
-    
+    }
+
+    /**
+     * Display a listing of the resource for the API's endpoint.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list()
+    {
+        return response()->jSon(['formatos' => FormatoResource::collection(Formato::all())],200);
+    }
+
+    /**
+     * Display the specified resource for the API's endpoint.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id)
+    {
+        $presentaciones = Presentacion::where('formato_id',$id)->get();
+        return response()->jSon(['presentaciones' => PresentacionResource::collection($presentaciones)],200);
     }
 }

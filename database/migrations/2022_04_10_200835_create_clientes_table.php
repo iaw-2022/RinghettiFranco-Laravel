@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('documento_tipo');
-            $table->bigInteger('documento_numero');
+            $table->integer('documento_numero');
             $table->string('correo');
             $table->string('telefono');
             $table->string('direccion');

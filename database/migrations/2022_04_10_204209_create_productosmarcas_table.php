@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('encargados', function (Blueprint $table) {
+        Schema::create('productosmarcas', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedBigInteger('id_presentacion');
-            $table->foreign('id_presentacion')->references('id')->on('presentaciones');
-            $table->integer('cantidad');
-            $table->unsignedBigInteger('id_pedido');
-            $table->foreign('id_pedido')->references('id')->on('pedidos');
+            $table->unsignedBigInteger('id_producto');
+            $table->foreign('id_producto')->references('id')->on('productos');
+            $table->unsignedBigInteger('id_marca');
+            $table->foreign('id_marca')->references('id')->on('marcas');
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('encargados');
+        Schema::dropIfExists('productosmarcas');
     }
 };

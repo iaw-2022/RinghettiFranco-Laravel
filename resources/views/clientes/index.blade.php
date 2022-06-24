@@ -26,10 +26,10 @@
                 <table class="table table-striped table-hover table-bordered" id="myTable">
                     <thead>
                         <tr>
-                            <th style="width: 30%" scope="col">Nombre</th>
-                            <th style="width: 20%" scope="col">Documento</th>
-                            <th style="width: 30%" scope="col">Correo</th>
-                            <th style="width: 20%" scope="col">Sit. IVA</th>
+                            <th style="width: 37%" scope="col">Nombre</th>
+                            <th style="width: 16%" scope="col">Documento</th>
+                            <th style="width: 37%" scope="col">Correo</th>
+                            <th style="width: 10%" scope="col">Sit. IVA</th>
                         </tr>
                     </thead>
                 
@@ -38,7 +38,7 @@
                         <tr>
                             <td>{{$cliente->apellido}}, {{$cliente->nombre}}</td>
                             <td>{{$cliente->documento_tipo}}: {{$cliente->documento_numero}}</td>
-                            <td>{{$cliente->email}}</td>
+                            <td>{{$cliente->correo}}</td>
                             <td>{{$cliente->IVA}}</td>
                             <td>
                                 <a href="{{route('clientes-show', ['id' => $cliente->id])}}" class="view" title="View" data-toggle="tooltip"><x-bi-info-circle-fill /></a>

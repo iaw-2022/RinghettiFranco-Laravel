@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Pedido;
 use App\Http\Requests\ClienteRequest;
@@ -45,12 +45,11 @@ class ClientesController extends Controller
         $cliente->apellido = $request->apellido;
         $cliente->documento_tipo = $request->doctipo;
         $cliente->documento_numero = $request->docnro;
-        $cliente->email = $request->email;
+        $cliente->correo = $request->correo;
         $cliente->telefono = $request->telefono;
         $cliente->direccion = $request->direccion;
         $cliente->IVA = $request->IVA;
         $cliente->CUIT = $request->CUIT; 
-        $cliente->password = Hash::make($request->docnro);
 
         $cliente->save();
 
@@ -100,7 +99,7 @@ class ClientesController extends Controller
             $cliente->apellido = $request->apellido;
             $cliente->documento_tipo = $request->doctipo;
             $cliente->documento_numero = $request->docnro;
-            $cliente->email = $request->email;
+            $cliente->correo = $request->correo;
             $cliente->telefono = $request->telefono;
             $cliente->direccion = $request->direccion;
             $cliente->IVA = $request->IVA;

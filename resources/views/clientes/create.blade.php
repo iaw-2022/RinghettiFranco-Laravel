@@ -60,11 +60,11 @@
                     <br>
                     <div class="row align-items-center">
                         <div class="col-2">
-                            <label for="inputEmail"><b>Correo</b></label>
+                            <label for="inputCorreo"><b>Correo</b></label>
                         </div>
                         <div class="col-md-6">
-                            <input type="email" name="email" class="form-control" id="inputEmail" placeholder="ejemplo@ejemplo.com" value={{old('email')}}>
-                            @error('email')
+                            <input type="email" name="correo" class="form-control" id="inputCorreo" placeholder="ejemplo@ejemplo.com" value={{old('correo')}}>
+                            @error('correo')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror   
                         </div>
@@ -87,7 +87,7 @@
                             <label><b>Domicilio</b></label>
                         </div>
                         <div class="col-md-5">
-                            <input type="text" name="direccion" class="form-control" id="inputDireccion" placeholder="Direccion" value={{old('direccion')}}>
+                            <input type="text" name="direccion" class="form-control" id="inputDireccion" placeholder="Direccion" value={{old('direccion', $cliente->direccion)}}>
                             @error('direccion')
                                 <small class="text-danger">{{$message}}</small>
                                 <br>

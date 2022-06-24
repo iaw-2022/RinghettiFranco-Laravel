@@ -32,7 +32,7 @@
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label"><b>Contacto</b></label>              
-                <label class="col-form-label col-sm-10">{{$cliente->email}} - {{$cliente->telefono}}</label>
+                <label class="col-form-label col-sm-10">{{$cliente->telefono}} - {{$cliente->correo}}</label>
             </div>
             
             <div class="form-group row">

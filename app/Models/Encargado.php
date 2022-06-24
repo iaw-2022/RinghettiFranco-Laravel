@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Encargado extends Model
 {
     use HasFactory;
+    
+    public $timestamps=false;
 
     protected $fillable = [
         'id',
-        'cliente_id',
-        'fecha_realizado',
-        'fecha_entregado'
+        'presentacion_id',
+        'pedido_id',
+        'cantidad'
     ];    
 
     public function Pedido(){

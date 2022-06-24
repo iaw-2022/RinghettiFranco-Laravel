@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Presentacion;
+use App\Http\Requests\PresentacionRequest;
+use App\Models\Formato;
+use App\Models\Marca;
+use App\Models\Producto;
+use Exception;
 
 class PresentacionesController extends Controller
 {
@@ -25,7 +30,13 @@ class PresentacionesController extends Controller
      */
     public function create()
     {
-        //
+        $productos = Producto::All();
+        $marcas = Marca::All();
+        $formatos = Formato::All();
+        return view('presentaciones.create')
+            ->with('productos', $productos)
+            ->with('marcas', $marcas)
+            ->with('formatos', $formatos);
     }
 
     /**
@@ -34,9 +45,18 @@ class PresentacionesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PresentacionRequest $request)
     {
-        //
+        $presentacion = new Presentacion();
+
+        $presentacion->precio = $request->precio;
+        $presentacion->marca_id = $request->marca_id;
+        $presentacion->producto_id = $request->producto_id;
+        $presentacion->formato_id = $request->formato_id;
+
+        $presentacion->save();
+
+        return redirect()->route('presentaciones-index')->with('success', 'Se agregó con éxito el nuevo producto.');
     }
 
     /**
@@ -58,7 +78,15 @@ class PresentacionesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $presentacion = Presentacion::findOrFail($id);
+        $productos = Producto::All();
+        $marcas = Marca::All();
+        $formatos = Formato::All();
+        return view('presentaciones.update')
+            ->with('presentacion', $presentacion)
+            ->with('productos', $productos)
+            ->with('marcas', $marcas)
+            ->with('formatos', $formatos);
     }
 
     /**
@@ -68,9 +96,23 @@ class PresentacionesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PresentacionRequest $request, $id)
     {
-        //
+        try{
+            $presentacion = Presentacion::findOrFail($id);
+
+            $presentacion->stock = $request->stock;
+            $presentacion->precio = $request->precio;
+            $presentacion->marca_id = $request->marca_id;
+            $presentacion->producto_id = $request->producto_id;
+            $presentacion->formato_id = $request->formato_id;
+
+            $presentacion->save();
+
+            return redirect()->route('presentaciones-index')->with('success', 'Se modificaron con éxito los datos de la presentación.'); 
+        }catch(Exception $ex){
+            return redirect()->back()->with('error', 'Algo salió mal.');
+        }
     }
 
     /**
@@ -81,6 +123,9 @@ class PresentacionesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $presentacion = Presentacion::findOrFail($id);
+        $presentacion->delete();
+        
+        return redirect()->route('presentaciones-index')->with('success', 'Se elimino con éxito la presentación.');
     }
 }

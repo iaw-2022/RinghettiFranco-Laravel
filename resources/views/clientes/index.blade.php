@@ -11,7 +11,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8"><h2><b>Clientes</b></h2></div>
-                        <div class="col-sm-8"><h2><a href="" type="button" class="btn btn-primary" method="GET">Nuevo cliente</a></h2></div>
+                        <div class="col-sm-8"><h2><a href="{{route('clientes-create')}}" type="button" class="btn btn-primary" method="GET">Nuevo cliente</a></h2></div>
                     </div>
                 </div>
           
@@ -26,10 +26,10 @@
                 <table class="table table-striped table-hover table-bordered" id="myTable">
                     <thead>
                         <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Documento</th>
-                            <th scope="col">Correo</th>
-                            <th scope="col">Sit. IVA</th>
+                            <th style="width: 37%" scope="col">Nombre</th>
+                            <th style="width: 16%" scope="col">Documento</th>
+                            <th style="width: 37%" scope="col">Correo</th>
+                            <th style="width: 10%" scope="col">Sit. IVA</th>
                         </tr>
                     </thead>
                 
@@ -44,10 +44,10 @@
                                 <a href="{{route('clientes-show', ['id' => $cliente->id])}}" class="view" title="View" data-toggle="tooltip"><x-bi-info-circle-fill /></a>
                             </td>
                             <td>
-                                <a href="" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
+                                <a href="{{route('clientes-edit', ['id' => $cliente->id])}}" class="edit" title="Edit" data-toggle="tooltip"><x-bi-pencil-square /></a>
                             </td>
                             <td>
-                                <a href="" onclick="return confirm('¿Desea eliminar a {{$cliente->apellido}}, {{$cliente->nombre}}?')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
+                                <a href="{{route('clientes-delete', ['id' => $cliente->id])}}" onclick="return confirm('¿Desea eliminar a {{$cliente->apellido}}, {{$cliente->nombre}}? Se eliminarán todos sus datos asociados')"  class="delete" title="Delete" data-toggle="tooltip"><x-bi-trash3-fill /></a>
                             </td>
                         </tr>   
                         @endforeach

@@ -16,10 +16,14 @@ return new class extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedBigInteger('id_cliente');
-            $table->foreign('id_cliente')->references('id')->on('clientes');
-            $table->datetime('fecha_realizado');
-            $table->datetime('fecha_entregado');
+            $table->unsignedBigInteger('cliente_id');
+            $table->foreign('cliente_id')
+                ->references('id')
+                ->on('clientes')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->date('fecha_realizado');
+            $table->date('fecha_entregado')->nullable();
         });
     }
 

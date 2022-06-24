@@ -27,5 +27,4 @@ class Encargado extends Model
     }
 
     protected $table = "encargados";
-
 }

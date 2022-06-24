@@ -36,8 +36,8 @@
             </div>
             
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><b>Situacion IVA</b></label>              
-                <label class="col-form-label col-sm-10">{{$cliente->IVA}} - {{$cliente->CUIT}}</label>
+                <label class="col-sm-2 col-form-label"><b>Situacion IVA</b></label>  
+                <label class="col-form-label col-sm-10">{{$cliente->IVA}} - CUIT/CUIL: {{$cliente->cuit}}</label>
             </div>
 
             <div class="form-group row">

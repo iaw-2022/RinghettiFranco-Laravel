@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::controller(PedidosController::class)->group(function () {
     Route::get("/pedidos/{cliente_id}", "list");
-    Route::get("/pedidos/{pedido_id}", "detail");
+    Route::get("/pedido/{pedido_id}", "detail");
     Route::post("/pedidos/nuevo", "store");
     Route::delete("/pedidos/cancelar/{pedido_id}", "cancel");
 });

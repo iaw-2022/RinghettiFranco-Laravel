@@ -30,13 +30,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get("/user/logout", "logout");
         Route::delete("/user/signout", "signout");
     });
+});
 
-    Route::controller(PedidosController::class)->group(function () {
-        Route::get("/pedidos", "list");
-        Route::get("/pedidos/{id}", "detail");
-        Route::post("/pedidos/nuevo", "store");
-        Route::delete("/pedidos/cancelar/{id}", "cancel");
-    });
+Route::controller(PedidosController::class)->group(function () {
+    Route::get("/pedidos/{cliente_id}", "list");
+    Route::get("/pedidos/{pedido_id}", "detail");
+    Route::post("/pedidos/nuevo", "store");
+    Route::delete("/pedidos/cancelar/{pedido_id}", "cancel");
 });
 
 Route::controller(MarcasController::class)->group(function () {

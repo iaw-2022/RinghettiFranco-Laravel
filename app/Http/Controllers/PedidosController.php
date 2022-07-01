@@ -64,6 +64,7 @@ class PedidosController extends Controller
             $presentacion = Presentacion::findOrFail($encargado['presentacion_id']);
 
             $stockfinal = $presentacion->stock - $encargado['cantidad'];
+            /** 
             if ($stockfinal < 0) {
                 $cancelados = Encargado::where('pedido_id', $nuevopedido->id)->get();
                 foreach ($cancelados as $cancelado) {
@@ -75,7 +76,8 @@ class PedidosController extends Controller
                 $nuevopedido->delete();
                 return response()->jSon(['message' => "Se solicitaron más unidades de las disponibles en stock de algúno de los productos encargados."], 406);
             }
-
+            */
+            
             $presentacion->stock = $stockfinal;
             $presentacion->save();
 

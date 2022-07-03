@@ -45,7 +45,7 @@ class PedidosController extends Controller
      */
     public function store(Request $request)
     {
-        $cliente = Auth::user();
+        $cliente = Cliente::findOrFail($request->cliente_id);
 
         if (count($request->encargados) == 0) {
             return response()->jSon(['message' => "Debe haber productos encargados en el pedido."], 406);
@@ -64,6 +64,7 @@ class PedidosController extends Controller
             $presentacion = Presentacion::findOrFail($encargado['presentacion_id']);
 
             $stockfinal = $presentacion->stock - $encargado['cantidad'];
+            /** 
             if ($stockfinal < 0) {
                 $cancelados = Encargado::where('pedido_id', $nuevopedido->id)->get();
                 foreach ($cancelados as $cancelado) {
@@ -75,7 +76,8 @@ class PedidosController extends Controller
                 $nuevopedido->delete();
                 return response()->jSon(['message' => "Se solicitaron más unidades de las disponibles en stock de algúno de los productos encargados."], 406);
             }
-
+            */
+            
             $presentacion->stock = $stockfinal;
             $presentacion->save();
 
@@ -156,10 +158,9 @@ class PedidosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function list()
+    public function list($cliente_id)
     {
-        $cliente = Auth::user();
-        $pedidos = Pedido::where('cliente_id', $cliente->id)->get();
+        $pedidos = Pedido::where('cliente_id', $cliente_id)->get();
         return response()->jSon(['pedidos' => PedidoResource::collection($pedidos)], 200);
     }
 
@@ -169,34 +170,24 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function detail($id)
+    public function detail($pedido_id)
     {
-        $cliente = Auth::user();
-        $pedido = Pedido::findOrFail($id);
-
-        if($pedido->cliente_id <> $cliente->id) {
-            return response()->jSon(['message' => "El id del pedido no corresponde con un pedido realizado por el cliente."], 403);   
-        }
-
+        $pedido = Pedido::findOrFail($pedido_id);
         $encargados = Encargado::where('pedido_id', $pedido->id)->get();
+
         return response()->jSon(['pedido' => new PedidoResource($pedido), 'encargados' => EncargadoResource::collection($encargados)], 200);
     }
 
-    public function cancel($id)
+    public function cancel($pedido_id)
     {
-        $cliente = Auth::user();
-        $pedido = Pedido::findOrFail($id);
-
-        if($pedido->cliente_id <> $cliente->id) {
-            return response()->jSon(['message' => "El id del pedido no corresponde con un pedido realizado por el cliente."], 403);   
-        }
+        $pedido = Pedido::findOrFail($pedido_id);
 
         $fecharealizado = Carbon::createFromFormat('Y-m-d',  $pedido->fecha_realizado);
         $fechamargen = $fecharealizado->addDay();
         $hoy = Carbon::now();
 
         if ($hoy->lte($fechamargen)) {
-            $encargados = Encargado::where('pedido_id', $id)->get();
+            $encargados = Encargado::where('pedido_id', $pedido_id)->get();
             foreach ($encargados as $encargado) {
                 $presentacion = Presentacion::findOrFail($encargado->presentacion_id);
                 $presentacion->stock += $encargado->cantidad;

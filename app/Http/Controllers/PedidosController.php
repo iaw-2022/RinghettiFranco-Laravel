@@ -17,27 +17,6 @@ use Illuminate\Support\Facades\Auth;
 class PedidosController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $pedidos = Pedido::All()->SortBy('cliente_id');
-        return view('pedidos.index')->with('pedidos', $pedidos);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage for the API's endpoint.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -87,68 +66,6 @@ class PedidosController extends Controller
         }
 
         return response()->jSon(['message' => "Se realizó con exito el pedido."], 200);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $pedido = Pedido::findOrFail($id);
-        $encargados = Encargado::all()->where('pedido_id', $id);
-        return view('pedidos.show')
-            ->with('pedido', $pedido)
-            ->with('encargados', $encargados);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        try {
-            $pedido = Pedido::findOrFail($id);
-
-            $pedido->fecha_entregado = Carbon::now()->format('Y-m-d');
-
-            $pedido->save();
-
-            return redirect()->route('pedidos-index')->with('success', 'Se notificó con éxito la entrega del pedido.');
-        } catch (Exception $ex) {
-            return redirect()->back()->with('error', 'Algo salió mal.');
-        }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $pedido = Pedido::findOrFail($id);
-        $pedido->delete();
-
-        return redirect()->route('pedidos-index')->with('success', 'Se elimino con éxito el pedido.');
     }
 
     /**

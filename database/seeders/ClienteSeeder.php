@@ -17,27 +17,15 @@ class ClienteSeeder extends Seeder
     public function run()
     {
         DB::table('clientes')->insert([
-            'nombre' => 'Franco Manuel',
-            'apellido'=> 'Ringhetti',
+            'nombre' => 'Natalia',
+            'apellido'=> 'Natalia',
             'documento_tipo' => 'DNI',
-            'documento_numero' => '41547459',
-            'email' => 'francuito473@gmail.com',
-            'telefono' => '+5492914728941',
-            'direccion' => 'Falcon 473',
-            'IVA' => 'Consumidor Final',
-            'CUIT' => '20415474599',
-            'password' => Hash::make('12345678')
-        ]);
-        DB::table('clientes')->insert([
-            'nombre' => 'Fer',
-            'apellido'=> 'Test',
-            'documento_tipo' => 'DNI',
-            'documento_numero' => '12345678',
-            'email' => 'iaw-fer@parapr.com',
+            'documento_numero' => '69420420',
+            'email' => 'NN@gmail.com',
             'telefono' => '',
             'direccion' => '',
             'IVA' => 'Consumidor Final',
-            'CUIT' => '',
+            'CUIT' => '20694204209',
             'password' => Hash::make('12345678')
         ]);
     }
